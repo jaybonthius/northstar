@@ -7,7 +7,7 @@ A [Lit](https://lit.dev/) web component with drag-and-drop sorting functionality
 - **File**: [`sortable-example.ts`](./sortable-example.ts)
 - **Custom Element**: `<sortable-example>`
 - **Dependencies**: lit, sortablejs
-- **Output**: `app/ui/static/web-components/sortable-component.js`
+- **Output**: `app/features/sortable/web/static/web-components/sortable-component.js`
 
 ## Setup
 
@@ -24,7 +24,7 @@ Uncomment [these lines](../../../../cmd/web/build/main.go#L31-L34) in [`cmd/web/
 ```go
 {
     InputPath:  "app/features/sortable/web-components/sortable-example.ts",
-    OutputPath: "web-components/sortable-example",
+    OutputPath: "app/features/sortable/web/static/web-components/sortable-component.js",
 },
 ```
 
@@ -34,7 +34,7 @@ Uncomment [these lines](../../../../cmd/web/build/main.go#L31-L34) in [`cmd/web/
 go run cmd/web/build/main.go
 ```
 
-This compiles the TypeScript component using esbuild and outputs it to `app/ui/static/web-components/sortable-component.js`.
+This compiles the TypeScript component using esbuild and outputs it to `app/features/sortable/web/static/web-components/sortable-component.js`.
 
 ## Usage
 

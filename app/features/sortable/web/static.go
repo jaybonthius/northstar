@@ -1,4 +1,4 @@
-package ui
+package web
 
 import (
 	"embed"
@@ -14,5 +14,5 @@ var (
 )
 
 func StaticPath(path string) string {
-	return "/" + StaticSys.HashName("static/"+path)
+	return "/sortable/" + StaticSys.HashName("static/"+path)
 }

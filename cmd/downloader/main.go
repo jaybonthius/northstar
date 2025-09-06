@@ -20,15 +20,15 @@ func main() {
 
 func run() error {
 	files := map[string]string{
-		"https://raw.githubusercontent.com/starfederation/datastar/develop/bundles/datastar.js":     "app/ui/static/datastar/datastar.js",
-		"https://raw.githubusercontent.com/starfederation/datastar/develop/bundles/datastar.js.map": "app/ui/static/datastar/datastar.js.map",
-		"https://github.com/saadeghi/daisyui/releases/latest/download/daisyui.js":                   "app/ui/styles/daisyui/daisyui.js",
-		"https://github.com/saadeghi/daisyui/releases/latest/download/daisyui-theme.js":             "app/ui/styles/daisyui/daisyui-theme.js",
+		"https://raw.githubusercontent.com/starfederation/datastar/develop/bundles/datastar.js":     "app/features/common/web/static/datastar/datastar.js",
+		"https://raw.githubusercontent.com/starfederation/datastar/develop/bundles/datastar.js.map": "app/features/common/web/static/datastar/datastar.js.map",
+		"https://github.com/saadeghi/daisyui/releases/latest/download/daisyui.js":                   "app/features/common/daisyui/daisyui.js",
+		"https://github.com/saadeghi/daisyui/releases/latest/download/daisyui-theme.js":             "app/features/common/daisyui/daisyui-theme.js",
 	}
 
 	directories := []string{
-		"app/ui/static/datastar",
-		"app/ui/styles/daisyui",
+		"app/features/common/web/static/datastar/",
+		"app/features/common/daisyui",
 	}
 
 	if err := removeDirectories(directories); err != nil {

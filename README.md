@@ -134,7 +134,7 @@ Web components are organized by feature in the `app/features/*/web-components/` 
 go tool task build
 ```
 
-This compiles the TypeScript components using esbuild and outputs them to `app/ui/static/web-components/`.
+This compiles the TypeScript components using esbuild and outputs them to `app/features/*/web/static/web-components/`.
 
 See the individual component READMEs for detailed setup instructions and usage examples.
 

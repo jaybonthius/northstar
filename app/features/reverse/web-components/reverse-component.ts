@@ -20,3 +20,5 @@ class ReverseComponent extends HTMLElement {
 }
 
 customElements.define("reverse-component", ReverseComponent);
+
+

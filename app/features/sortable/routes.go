@@ -1,4 +1,4 @@
-package sortable
+package routes
 
 import (
 	"net/http"

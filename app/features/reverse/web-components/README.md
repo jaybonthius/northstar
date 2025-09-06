@@ -6,7 +6,7 @@ A vanilla web component that reverses text input, powered by Datastar
 
 - **File**: [`reverse-component.ts`](./reverse-component.ts)
 - **Custom Element**: `<reverse-component>`
-- **Output**: `app/ui/static/web-components/reverse-component.js`
+- **Output**: `app/features/reverse/web/static/web-components/reverse-component.js`
 
 ## Setup
 
@@ -22,7 +22,7 @@ go mod tidy
 go run cmd/web/build/main.go
 ```
 
-The component is automatically included in the build process and compiles to `app/ui/static/web-components/reverse-component.js`.
+The component is automatically included in the build process and compiles to `app/features/reverse/web/static/web-components/reverse-component.js`.
 
 ## Usage
 

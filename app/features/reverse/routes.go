@@ -1,4 +1,4 @@
-package reverse
+package routes
 
 import (
 	"net/http"

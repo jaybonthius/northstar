@@ -11,7 +11,7 @@ import templruntime "github.com/a-h/templ/runtime"
 import (
 	"northstar/app/features/common/components"
 	"northstar/app/features/common/layouts"
-	"northstar/app/ui"
+	"northstar/app/features/reverse/web"
 )
 
 func ReversePage() templ.Component {
@@ -56,9 +56,9 @@ func ReversePage() templ.Component {
 				return templ_7745c5c3_Err
 			}
 			var templ_7745c5c3_Var3 string
-			templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(ui.StaticPath("web-components/reverse-component.js"))
+			templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(web.StaticPath("web-components/reverse-component.js"))
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `app/features/reverse/pages/reverse.templ`, Line: 24, Col: 82}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `app/features/reverse/pages/reverse.templ`, Line: 24, Col: 83}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
 			if templ_7745c5c3_Err != nil {

@@ -13,7 +13,8 @@ import (
 	"time"
 
 	commonWeb "northstar/app/features/common/web"
-	"northstar/app/ui"
+	reverseWeb "northstar/app/features/reverse/web"
+	sortableWeb "northstar/app/features/sortable/web"
 
 	counterFeature "northstar/app/features/counter"
 	indexFeature "northstar/app/features/index"
@@ -42,7 +43,8 @@ func SetupRoutes(ctx context.Context, router chi.Router) (err error) {
 	})
 
 	router.Handle("/common/static/*", http.StripPrefix("/common", hashfs.FileServer(commonWeb.StaticSys)))
-	router.Handle("/static/*", hashfs.FileServer(ui.StaticSys))
+	router.Handle("/reverse/static/*", http.StripPrefix("/reverse", hashfs.FileServer(reverseWeb.StaticSys)))
+	router.Handle("/sortable/static/*", http.StripPrefix("/sortable", hashfs.FileServer(sortableWeb.StaticSys)))
 
 	natsPort, err := getFreeNatsPort()
 	if err != nil {
