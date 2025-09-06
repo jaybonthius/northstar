@@ -4,11 +4,6 @@ data
 
 .task
 
-internal/ui/static/*
-!internal/ui/static/assets
-!internal/ui/static/js
-!internal/ui/static/web-components
-
 # ------------------------------------------------------------------
 # Go
 # If you prefer the allow list template instead of the deny list, see community template:

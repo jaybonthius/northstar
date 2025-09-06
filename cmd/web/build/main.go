@@ -9,8 +9,6 @@ import (
 	"github.com/evanw/esbuild/pkg/api"
 )
 
-const staticDirectory = "internal/ui/static"
-
 func main() {
 	watch := flag.Bool("watch", false, "Enable watcher mode")
 	flag.Parse()
@@ -25,15 +23,15 @@ func run(watch bool) error {
 	opts := api.BuildOptions{
 		EntryPointsAdvanced: []api.EntryPoint{
 			{
-				InputPath:  "internal/features/reverse/web-components/reverse-component.ts",
-				OutputPath: "web-components/reverse-component",
+				InputPath:  "app/features/reverse/web-components/reverse-component.ts",
+				OutputPath: "app/features/reverse/web/static/web-components/reverse-component",
 			},
 			// {
-			// 	InputPath:  "internal/features/sortable/web-components/sortable-example.ts",
-			// 	OutputPath: "web-components/sortable-example",
+			// 	InputPath:  "app/features/sortable/web-components/sortable-example.ts",
+			// 	OutputPath: "app/features/sortable/web/static/web-components/sortable-example",
 			// },
 		},
-		Outdir:            staticDirectory,
+		Outdir:            "./",
 		Bundle:            true,
 		Write:             true,
 		LogLevel:          api.LogLevelInfo,

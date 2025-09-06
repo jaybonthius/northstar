@@ -6,7 +6,7 @@ import (
 	"log/slog"
 	"net"
 	"net/http"
-	internal "northstar/internal"
+	app "northstar/app"
 	"os"
 	"os/signal"
 	"syscall"
@@ -71,7 +71,7 @@ func run(ctx context.Context) error {
 		middleware.Recoverer,
 	)
 
-	if err := internal.SetupRoutes(egctx, router); err != nil {
+	if err := app.SetupRoutes(egctx, router); err != nil {
 		return fmt.Errorf("error setting up routes: %w", err)
 	}
 

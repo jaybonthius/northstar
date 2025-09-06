@@ -2,7 +2,6 @@ version: "3"
 
 env:
   NATS_PORT: 4222
-  STATIC_DIR: "internal/ui/static"
 
 tasks:
   # The `build:` tasks below are used together for production builds of a project
@@ -14,27 +13,28 @@ tasks:
     generates:
       - "**/*_templ.go"
 
+  # TODO: make this per-feature CSS
   build:styles:
     cmds:
-      - go tool gotailwind -i internal/ui/styles/styles.css -o $STATIC_DIR/index.css
+      - go tool gotailwind -i app/features/common/styles/styles.css -o app/features/common/web/static/index.css
     sources:
-      - "./internal/**/*.html"
-      - "./internal/**/*.ts"
-      - "./internal/**/*.templ"
-      - "./internal/**/*.go"
-      - "./internal/**/*.css"
+      - "./app/**/*.html"
+      - "./app/**/*.ts"
+      - "./app/**/*.templ"
+      - "./app/**/*.go"
+      - "./app/**/*.css"
     generates:
-      - "{{.STATIC_DIR}}/index.css"
+      - "app/features/common/web/static/index.css"
 
   build:wc:
     cmds:
       - go run cmd/web/build/main.go
     sources:
-      - "./internal/**/**/*.html"
-      - "./internal/**/**/*.css"
-      - "./internal/**/**/*.ts"
+      - "./app/**/*.html"
+      - "./app/**/*.css"
+      - "./app/**/*.ts"
     generates:
-      - "{{.STATIC_DIR}}/web-components/**"
+      - "**/web-components/**"
 
   build:
     cmds:
@@ -62,9 +62,10 @@ tasks:
     cmds:
       - go tool templ generate -watch
 
+  # TODO: make this per-feature CSS
   live:styles:
     cmds:
-      - go tool gotailwind -i internal/ui/styles/styles.css -o $STATIC_DIR/index.css -w
+      - go tool gotailwind -i app/features/common/styles/styles.css -o app/features/common/web/static/index.css -w
   
   live:wc:
     cmds:
