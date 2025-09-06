@@ -14,9 +14,10 @@ tasks:
     generates:
       - "**/*_templ.go"
 
+  # TODO: make this per-feature CSS
   build:styles:
     cmds:
-      - go tool gotailwind -i app/ui/styles/styles.css -o $STATIC_DIR/index.css
+      - go tool gotailwind -i app/ui/styles/styles.css -o app/features/common/web/static/index.css
     sources:
       - "./app/**/*.html"
       - "./app/**/*.ts"
@@ -24,7 +25,7 @@ tasks:
       - "./app/**/*.go"
       - "./app/**/*.css"
     generates:
-      - "{{.STATIC_DIR}}/index.css"
+      - "app/features/common/web/static/index.css"
 
   build:wc:
     cmds:
@@ -62,9 +63,10 @@ tasks:
     cmds:
       - go tool templ generate -watch
 
+  # TODO: make this per-feature CSS
   live:styles:
     cmds:
-      - go tool gotailwind -i app/ui/styles/styles.css -o $STATIC_DIR/index.css -w
+      - go tool gotailwind -i app/ui/styles/styles.css -o app/features/common/web/static/index.css -w
   
   live:wc:
     cmds:

@@ -12,12 +12,14 @@ import (
 	"sync"
 	"time"
 
+	commonWeb "northstar/app/features/common/web"
+	"northstar/app/ui"
+
 	counterFeature "northstar/app/features/counter"
 	indexFeature "northstar/app/features/index"
 	monitorFeature "northstar/app/features/monitor"
 	reverseFeature "northstar/app/features/reverse"
 	sortableFeature "northstar/app/features/sortable"
-	"northstar/app/ui"
 
 	"github.com/benbjohnson/hashfs"
 	"github.com/delaneyj/toolbelt"
@@ -39,6 +41,7 @@ func SetupRoutes(ctx context.Context, router chi.Router) (err error) {
 		<-r.Context().Done()
 	})
 
+	router.Handle("/common/static/*", http.StripPrefix("/common", hashfs.FileServer(commonWeb.StaticSys)))
 	router.Handle("/static/*", hashfs.FileServer(ui.StaticSys))
 
 	natsPort, err := getFreeNatsPort()
