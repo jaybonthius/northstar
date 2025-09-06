@@ -4,10 +4,10 @@ data
 
 .task
 
-internal/ui/static/*
-!internal/ui/static/assets
-!internal/ui/static/js
-!internal/ui/static/web-components
+app/ui/static/*
+!app/ui/static/assets
+!app/ui/static/js
+!app/ui/static/web-components
 
 # ------------------------------------------------------------------
 # Go

@@ -98,7 +98,7 @@ Completely open to PR's and feature requests
 
 ### Embedded NATS
 
-An embedded NATS server that powers the `TODO` application is configured and booted up in the [router.go](./internal/router.go#L43) file
+An embedded NATS server that powers the `TODO` application is configured and booted up in the [router.go](./app/router.go#L43) file
 
 To interface with it, you should install the [nats-cli](https://github.com/nats-io/natscli)
 
@@ -123,10 +123,10 @@ nats kv put todos [key] '{"todos":[{"text":"Hello, NATS!","completed":true}],"ed
 
 ## Web Components x Datastar
 
-Web components are organized by feature in the `internal/features/*/web-components/` directories:
+Web components are organized by feature in the `app/features/*/web-components/` directories:
 
-- **[Reverse Component](./internal/features/reverse/web-components/)** - Vanilla web component for text reversal
-- **[Sortable Component](./internal/features/sortable/web-components/)** - Lit component with SortableJS integration
+- **[Reverse Component](./app/features/reverse/web-components/)** - Vanilla web component for text reversal
+- **[Sortable Component](./app/features/sortable/web-components/)** - Lit component with SortableJS integration
 
 ### Building Web Components
 
@@ -134,7 +134,7 @@ Web components are organized by feature in the `internal/features/*/web-componen
 go tool task build
 ```
 
-This compiles the TypeScript components using esbuild and outputs them to `internal/ui/static/web-components/`.
+This compiles the TypeScript components using esbuild and outputs them to `app/ui/static/web-components/`.
 
 See the individual component READMEs for detailed setup instructions and usage examples.
 

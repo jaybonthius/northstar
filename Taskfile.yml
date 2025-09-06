@@ -2,7 +2,7 @@ version: "3"
 
 env:
   NATS_PORT: 4222
-  STATIC_DIR: "internal/ui/static"
+  STATIC_DIR: "app/ui/static"
 
 tasks:
   # The `build:` tasks below are used together for production builds of a project
@@ -16,13 +16,13 @@ tasks:
 
   build:styles:
     cmds:
-      - go tool gotailwind -i internal/ui/styles/styles.css -o $STATIC_DIR/index.css
+      - go tool gotailwind -i app/ui/styles/styles.css -o $STATIC_DIR/index.css
     sources:
-      - "./internal/**/*.html"
-      - "./internal/**/*.ts"
-      - "./internal/**/*.templ"
-      - "./internal/**/*.go"
-      - "./internal/**/*.css"
+      - "./app/**/*.html"
+      - "./app/**/*.ts"
+      - "./app/**/*.templ"
+      - "./app/**/*.go"
+      - "./app/**/*.css"
     generates:
       - "{{.STATIC_DIR}}/index.css"
 
@@ -30,9 +30,9 @@ tasks:
     cmds:
       - go run cmd/web/build/main.go
     sources:
-      - "./internal/**/**/*.html"
-      - "./internal/**/**/*.css"
-      - "./internal/**/**/*.ts"
+      - "./app/**/**/*.html"
+      - "./app/**/**/*.css"
+      - "./app/**/**/*.ts"
     generates:
       - "{{.STATIC_DIR}}/web-components/**"
 
@@ -64,7 +64,7 @@ tasks:
 
   live:styles:
     cmds:
-      - go tool gotailwind -i internal/ui/styles/styles.css -o $STATIC_DIR/index.css -w
+      - go tool gotailwind -i app/ui/styles/styles.css -o $STATIC_DIR/index.css -w
   
   live:wc:
     cmds:
