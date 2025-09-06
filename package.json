@@ -1,17 +1,14 @@
 {
   "name": "northstar",
-  "private": false,
+  "private": true,
   "version": "0.0.1",
+  "workspaces": [
+    "app/features/*"
+  ],
   "scripts": {
-    "build": "tsc"
-  },
-  "dependencies": {
-    "lit": "^3.3.1",
-    "sortablejs": "^1.15.6"
+    "build:web": "go run cmd/web/build/main.go"
   },
   "devDependencies": {
-    "@types/node": "^24.0.14",
-    "@types/sortablejs": "^1.15.8",
-    "typescript": "^5.8.3"
+    "@types/node": "^24.0.14"
   }
 }

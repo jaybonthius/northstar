@@ -7,6 +7,18 @@ settings:
 importers:
 
   .:
+    devDependencies:
+      '@types/node':
+        specifier: ^24.0.14
+        version: 24.0.14
+
+  app/features/reverse:
+    devDependencies:
+      typescript:
+        specifier: ^5.8.3
+        version: 5.9.2
+
+  app/features/sortable:
     dependencies:
       lit:
         specifier: ^3.3.1
@@ -15,15 +27,12 @@ importers:
         specifier: ^1.15.6
         version: 1.15.6
     devDependencies:
-      '@types/node':
-        specifier: ^24.0.14
-        version: 24.0.14
       '@types/sortablejs':
         specifier: ^1.15.8
         version: 1.15.8
       typescript:
         specifier: ^5.8.3
-        version: 5.8.3
+        version: 5.9.2
 
 packages:
 
@@ -54,8 +63,8 @@ packages:
   sortablejs@1.15.6:
     resolution: {integrity: sha512-aNfiuwMEpfBM/CN6LY0ibyhxPfPbyFeBTYJKCvzkJ2GkUpazIt3H+QIPAMHwqQ7tMKaHz1Qj+rJJCqljnf4p3A==}
 
-  typescript@5.8.3:
-    resolution: {integrity: sha512-p1diW6TqL9L07nNxvRMM7hMMw4c5XOo/1ibL4aAIGmSAt9slTE1Xgw5KWuof2uTOvCg9BY7ZRi+GaF+7sfgPeQ==}
+  typescript@5.9.2:
+    resolution: {integrity: sha512-CWBzXQrc/qOkhidw1OzBTQuYRbfyxDXJMVJ1XNwUHGROVmuaeiEm3OslpZ1RV96d7SKKjZKrSJu3+t/xlw3R9A==}
     engines: {node: '>=14.17'}
     hasBin: true
 
@@ -96,6 +105,6 @@ snapshots:
 
   sortablejs@1.15.6: {}
 
-  typescript@5.8.3: {}
+  typescript@5.9.2: {}
 
   undici-types@7.8.0: {}

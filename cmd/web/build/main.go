@@ -26,10 +26,10 @@ func run(watch bool) error {
 				InputPath:  "app/features/reverse/web-components/reverse-component.ts",
 				OutputPath: "app/features/reverse/web/static/web-components/reverse-component",
 			},
-			// {
-			// 	InputPath:  "app/features/sortable/web-components/sortable-example.ts",
-			// 	OutputPath: "app/features/sortable/web/static/web-components/sortable-example",
-			// },
+			{
+				InputPath:  "app/features/sortable/web-components/sortable-example.ts",
+				OutputPath: "app/features/sortable/web/static/web-components/sortable-example",
+			},
 		},
 		Outdir:            "./",
 		Bundle:            true,
@@ -41,7 +41,6 @@ func run(watch bool) error {
 		Format:            api.FormatESModule,
 		Sourcemap:         api.SourceMapLinked,
 		Target:            api.ESNext,
-		NodePaths:         []string{"node_modules"},
 	}
 
 	if watch {
