@@ -13,13 +13,13 @@ type CounterSignals struct {
 }
 
 templ CounterButtons() {
-	<div class="counter-buttons">
-		<button
+	<div class="counter-buttons-container">
+		<button class="counter-button"
 			data-on-click={ datastar.PostSSE("/counter/increment/global") }
 		>
 			Increment Global
 		</button>
-		<button
+		<button class="counter-button"
 			data-on-click={ datastar.PostSSE("/counter/increment/user") }
 		>
 			Increment User

@@ -1,16 +1,13 @@
-/* 
-   __________  __  ___   __________________ 
-  / ____/ __ \/ / / / | / /_  __/ ____/ __ \
- / /   / / / / / / /  |/ / / / / __/ / /_/ /
-/ /___/ /_/ / /_/ / /|  / / / / /___/ _, _/ 
-\____/\____/\____/_/ |_/ /_/ /_____/_/ |_|  
-                                           
-*/
+.counter-button {
+  background-color: var(--cyan-6);
+  border: none
+}
 
-.counter-buttons {
+.counter-buttons-container {
   display: flex;
   justify-content: space-around;
   gap: var(--size-4);
+  margin-bottom: var(--size-3);
 }
 
 .counter-counts-container {
