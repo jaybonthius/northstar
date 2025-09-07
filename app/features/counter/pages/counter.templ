@@ -4,6 +4,7 @@ import (
 	"github.com/starfederation/datastar-go/datastar"
 	"northstar/app/features/common/components"
 	"northstar/app/features/common/layouts"
+	web "northstar/app/features/counter/web"
 )
 
 type CounterSignals struct {
@@ -50,7 +51,7 @@ templ Counter(signals CounterSignals) {
 }
 
 templ CounterPage() {
-	@layouts.Base("Counter") {
+	@layouts.Base("Counter", web.StaticPath("index.css")) {
 		<main class="container">
 			@components.Navigation(components.PageCounter)
 			<article>

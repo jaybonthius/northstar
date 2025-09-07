@@ -13,6 +13,10 @@ import (
 	"time"
 
 	commonWeb "northstar/app/features/common/web"
+	counterWeb "northstar/app/features/counter/web"
+	indexWeb "northstar/app/features/index/web"
+
+	// monitorWeb "northstar/app/features/monitor/web"
 	reverseWeb "northstar/app/features/reverse/web"
 	sortableWeb "northstar/app/features/sortable/web"
 
@@ -43,6 +47,9 @@ func SetupRoutes(ctx context.Context, router chi.Router) (err error) {
 	})
 
 	router.Handle("/common/static/*", http.StripPrefix("/common", hashfs.FileServer(commonWeb.StaticSys)))
+	router.Handle("/counter/static/*", http.StripPrefix("/counter", hashfs.FileServer(counterWeb.StaticSys)))
+	router.Handle("/index/static/*", http.StripPrefix("/index", hashfs.FileServer(indexWeb.StaticSys)))
+	// router.Handle("/monitor/static/*", http.StripPrefix("/monitor", hashfs.FileServer(monitorWeb.StaticSys)))
 	router.Handle("/reverse/static/*", http.StripPrefix("/reverse", hashfs.FileServer(reverseWeb.StaticSys)))
 	router.Handle("/sortable/static/*", http.StripPrefix("/sortable", hashfs.FileServer(sortableWeb.StaticSys)))
 

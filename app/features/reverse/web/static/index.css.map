@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../styles/styles.css"],
+  "sourcesContent": ["/* \n    ____  _______    ____________  _____ ______\n   / __ \\/ ____/ |  / / ____/ __ \\/ ___// ____/\n  / /_/ / __/  | | / / __/ / /_/ /\\__ \\/ __/   \n / _, _/ /___  | |/ / /___/ _, _/___/ / /___   \n/_/ |_/_____/  |___/_____/_/ |_|/____/_____/   \n                                               \n*/\n\n.reverse-result {\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n}\n"],
+  "mappings": "AASA,CAAC,eACC,SAAU,OACV,cAAe,SACf,YAAa,MACf",
+  "names": []
+}

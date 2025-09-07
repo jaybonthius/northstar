@@ -7,7 +7,7 @@ import (
 )
 
 templ SortablePage() {
-	@layouts.Base("Sortable") {
+	@layouts.Base("Sortable", web.StaticPath("index.css")) {
 		<main class="container">
 			@components.Navigation(components.PageSortable)
 			<article>

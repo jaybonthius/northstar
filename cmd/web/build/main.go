@@ -34,6 +34,26 @@ func run(watch bool) error {
 				InputPath:  "app/features/common/styles/styles.css",
 				OutputPath: "app/features/common/web/static/index",
 			},
+			{
+				InputPath:  "app/features/sortable/styles/styles.css",
+				OutputPath: "app/features/sortable/web/static/index",
+			},
+			{
+				InputPath:  "app/features/counter/styles/styles.css",
+				OutputPath: "app/features/counter/web/static/index",
+			},
+			{
+				InputPath:  "app/features/index/styles/styles.css",
+				OutputPath: "app/features/index/web/static/index",
+			},
+			{
+				InputPath:  "app/features/reverse/styles/styles.css",
+				OutputPath: "app/features/reverse/web/static/index",
+			},
+			{
+				InputPath:  "app/features/monitor/styles/styles.css",
+				OutputPath: "app/features/monitor/web/static/index",
+			},
 		},
 		Outdir:            "./",
 		Bundle:            true,
