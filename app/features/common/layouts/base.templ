@@ -16,7 +16,7 @@ templ Base(title string) {
 			<script defer type="module" src={ web.StaticPath("datastar/datastar.js") }></script>
 			<link href={ web.StaticPath("index.css") } rel="stylesheet" type="text/css"/>
 		</head>
-		<body class="flex flex-col h-screen">
+		<body>
 			<div data-on-load="@get('/reload', {retryMaxCount: 1000, retryInterval:20, retryMaxWaitMs:200})"></div>
 			{ children... }
 		</body>

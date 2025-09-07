@@ -11,13 +11,16 @@ const (
 )
 
 templ Navigation(page page) {
-	<nav class="flex justify-center">
-		<ul class="menu menu-vertical md:menu-horizontal bg-base-200 rounded-box">
-			<li class={ "hover:text-primary", templ.KV("text-primary", page == PageIndex) }><a href="/">TODO</a></li>
-			<li class={ "hover:text-primary", templ.KV("text-primary", page == PageCounter) }><a href="/counter">Counter</a></li>
-			<li class={ "hover:text-primary", templ.KV("text-primary", page == PageMonitor) }><a href="/monitor">System Monitoring</a></li>
-			<li class={ "hover:text-primary", templ.KV("text-primary", page == PageReverse) }><a href="/reverse">Reverse</a></li>
-			<li class={ "hover:text-primary", templ.KV("text-primary", page == PageSortable) }><a href="/sortable">Sortable</a></li>
+	<nav>
+		<ul>
+			<li><strong>ThinkFast</strong></li>
+		</ul>
+		<ul>
+			<li><a href="/" class={ templ.KV("active-nav-item", page == PageIndex) }>TODO</a></li>
+			<li><a href="/counter" class={ templ.KV("active-nav-item", page == PageCounter) }>Counter</a></li>
+			<li><a href="/monitor" class={ templ.KV("active-nav-item", page == PageMonitor) }>System Monitoring</a></li>
+			<li><a href="/reverse" class={ templ.KV("active-nav-item", page == PageReverse) }>Reverse</a></li>
+			<li><a href="/sortable" class={ templ.KV("active-nav-item", page == PageSortable) }>Sortable</a></li>
 		</ul>
 	</nav>
 }

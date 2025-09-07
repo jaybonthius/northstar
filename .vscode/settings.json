@@ -3,10 +3,18 @@
     "templ": "html"
   },
   "go.useLanguageServer": true,
-  "tailwindCSS.includeLanguages": {
-    "templ": "html"
-  },
   "[templ]": {
     "editor.defaultFormatter": "a-h.templ"
-  }
+  },
+  "cssvar.files": [
+    "./node_modules/.pnpm/open-props@1.7.16/node_modules/open-props/open-props.min.css",
+    "./node_modules/.pnpm/@picocss+pico@2.1.1/node_modules/@picocss/pico/css/pico.min.css",
+    "./app/features/common/styles/styles.css"
+  ],
+  // Do not ignore node_modules css files, which is ignored by default
+  "cssvar.ignore": [],
+  // add support for autocomplete in JS or JS like files
+  "cssvar.extensions": [
+    "css", "postcss", "jsx", "tsx"
+  ]
 }

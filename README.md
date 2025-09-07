@@ -6,7 +6,7 @@
 - [NATS](https://docs.nats.io/)
 - [Datastar](https://github.com/starfederation/datastar)
 - [Templ](https://templ.guide/)
-  - [Tailwind](https://tailwindcss.com/) x [DaisyUI](https://daisyui.com/)
+- [Open Props](https://open-props.style/) x [Pico CSS](https://picocss.com/)
 
 # Setup
 
@@ -46,7 +46,7 @@ go tool task debug
 
 ## IDE Support
 
-- [Templ / TailwindCSS Support](https://templ.guide/commands-and-tools/ide-support)
+- [Templ Support](https://templ.guide/commands-and-tools/ide-support)
 
 ### Visual Studio Code Integration
 
@@ -141,7 +141,7 @@ See the individual component READMEs for detailed setup instructions and usage e
 ## Client
 
 - [datastar](https://www.jsdelivr.com/package/gh/starfederation/datastar)
-- [tailwindcss](https://tailwindcss.com/)
-- [daisyui](https://daisyui.com/)
+- [open-props](https://open-props.style/)
+- [picocss](https://picocss.com/)
 - [esbuild](https://esbuild.github.io/)
 - [lit](https://lit.dev/)

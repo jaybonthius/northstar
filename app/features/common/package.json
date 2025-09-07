@@ -1,0 +1,9 @@
+{
+  "name": "@northstar/common",
+  "private": true,
+  "version": "0.0.1",
+  "dependencies": {
+    "open-props": "^1.7.16",
+    "@picocss/pico": "^2.0.6"
+  }
+}

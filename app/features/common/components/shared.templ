@@ -18,5 +18,5 @@ templ Icon(icon string, attrs ...string) {
 }
 
 templ SseIndicator(signalName string) {
-	<div class="loading-dots text-primary" data-class={ fmt.Sprintf("{'loading ml-4': $%s}", signalName) }></div>
+    <div class="loading-indicator" data-class={ fmt.Sprintf("{'is-loading': $%s}", signalName) }></div>
 }

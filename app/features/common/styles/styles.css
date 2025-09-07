@@ -1,23 +1,263 @@
-@import "tailwindcss";
+@import "@picocss/pico/css/pico.min.css";
+@import "open-props/style";
 
-@plugin "./daisyui/daisyui.js" {
-    themes: light --default, dark --prefersdark;
+:root {
+  --pico-font-family: var(--font-monospace-code);
+  --pico-nav-element-spacing-horizontal: var(--size-3);
 }
 
-@plugin "./daisyui/daisyui-theme.js" {
-    name: "datastar";
+/* light color scheme (Default) */
+/* Can be forced with data-theme="light" */
+[data-theme=light],
+:root:not([data-theme=dark]),
+:host:not([data-theme=dark]) {
+  --pico-text-selection-color: var(--purple-3);
+  --pico-primary: var(--purple-8);
+  --pico-primary-background: var(--purple-7);
+  --pico-primary-underline: var(--purple-6);
+  --pico-primary-hover: var(--purple-9);
+  --pico-primary-hover-background: var(--purple-8);
+  --pico-primary-focus: var(--purple-5);
+  --pico-primary-inverse: #fff;
+}
 
-    --color-base-100: "#0b1325";
-    --color-base-200: "#1e304a";
-    --color-base-300: "#3a506b";
-    --color-primary: "#c9a75f";
-    --color-secondary: "#bfdbfe";
-    --color-accent: "#7dd3fc";
-    --color-neutral: "#444";
-    --color-neutral-content: "#fff";
-    --color-info: "#0369a1";
-    --color-success: "#69c383";
-    --color-warning: "#facc15";
-    --color-error: "#e11d48";
-  
+/* dark color scheme (Auto) */
+/* Automatically enabled if user has Dark mode enabled */
+@media only screen and (prefers-color-scheme: dark) {
+  :root:not([data-theme]),
+  :host:not([data-theme]) {
+    --pico-text-selection-color: var(--purple-4);
+    --pico-primary: var(--purple-4);
+    --pico-primary-background: var(--purple-7);
+    --pico-primary-underline: var(--purple-5);
+    --pico-primary-hover: var(--purple-2);
+    --pico-primary-hover-background: var(--purple-6);
+    --pico-primary-focus: var(--purple-3);
+    --pico-primary-inverse: #fff;
+  }
+}
+/* dark color scheme (Forced) */
+/* Enabled if forced with data-theme="dark" */
+[data-theme=dark] {
+  --pico-text-selection-color: var(--purple-4);
+  --pico-primary: var(--purple-4);
+  --pico-primary-background: var(--purple-7);
+  --pico-primary-underline: var(--purple-5);
+  --pico-primary-hover: var(--purple-2);
+  --pico-primary-hover-background: var(--purple-6);
+  --pico-primary-focus: var(--purple-3);
+  --pico-primary-inverse: #fff;
+}
+
+.active-nav-item {
+  background-color: var(--purple-1);
+  color: var(--purple-9);
+  border-radius: var(--radius-2);
+  padding: var(--size-1) var(--size-2);
+  font-weight: var(--font-weight-6);
+}
+
+.alert {
+  background-color: var(--orange-1);
+  color: var(--orange-11);
+  border: var(--border-size-1) solid var(--orange-7);
+  border-radius: var(--radius-2);
+  padding: var(--size-3);
+  text-align: center;
+  display: flex;
+  align-items: center;
+  gap: var(--size-2);
+  margin-bottom: var(--size-4);
+}
+
+.alert-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-2);
+}
+
+.alert-link {
+  color: var(--orange-11);
+  text-decoration: underline;
+}
+
+.loading-indicator {
+  display: inline-block;
+}
+
+.loading-indicator.is-loading {
+  opacity: 0.6;
+  pointer-events: none;
+  margin-left: 1rem;
+}
+
+/* 
+   _____ ____  ____  _________    ____  __    ______
+  / ___// __ \/ __ \/_  __/   |  / __ )/ /   / ____/
+  \__ \/ / / / /_/ / / / / /| | / __  / /   / __/   
+ ___/ / /_/ / _, _/ / / / ___ |/ /_/ / /___/ /___   
+/____/\____/_/ |_| /_/ /_/  |_/_____/_____/_____/                                                       
+*/
+
+.sortable-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-2);
+  padding: var(--size-3);
+  border: var(--border-size-1) solid var(--pico-primary);
+  border-radius: var(--radius-2);
+}
+
+.sortable-title {
+  font-size: var(--font-size-2);
+}
+
+.sortable-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-3);
+}
+
+.sortable-item {
+  background-color: var(--pico-primary);
+  color: var(--pico-primary-inverse);
+  padding: var(--size-3);
+  border-radius: var(--radius-2);
+  cursor: move;
+}
+
+.sortable-example {
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-8);
+}
+
+/* 
+   __________  __  ___   __________________ 
+  / ____/ __ \/ / / / | / /_  __/ ____/ __ \
+ / /   / / / / / / /  |/ / / / / __/ / /_/ /
+/ /___/ /_/ / /_/ / /|  / / / / /___/ _, _/ 
+\____/\____/\____/_/ |_/ /_/ /_____/_/ |_|  
+                                            
+*/
+
+.counter-buttons {
+  display: flex;
+  justify-content: space-around;
+  gap: var(--size-4);
+}
+
+.counter-counts-container {
+  display: flex;
+  justify-content: space-around;
+  gap: var(--size-4);
+}
+
+.counter-count {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--size-1);
+}
+
+.counter-label {
+  font-size: var(--font-size-3);
+  font-weight: var(--font-weight-6);
+}
+
+.counter-value {
+  font-size: var(--font-size-5);
+}
+
+/* 
+  __________  ____  ____ 
+ /_  __/ __ \/ __ \/ __ \
+  / / / / / / / / / / / /
+ / / / /_/ / /_/ / /_/ / 
+/_/  \____/_____/\____/  
+                         
+*/
+
+.todo-item {
+  display: flex;
+  align-items: center;
+  gap: var(--size-3);
+  padding: var(--size-3) 0;
+  border-bottom: 1px solid var(--pico-muted-border-color);
+}
+
+.todo-item:last-child {
+  border-bottom: none;
+}
+
+.todo-checkbox {
+  flex-shrink: 0;
+  cursor: pointer;
+  font-size: var(--font-size-4);
+  color: var(--pico-primary);
+  transition: color 0.2s ease;
+}
+
+.todo-checkbox:hover {
+  color: var(--pico-primary-hover);
+}
+
+.todo-text {
+  flex-grow: 1;
+  cursor: pointer;
+  word-break: break-word;
+  padding: var(--size-2);
+  margin: 0;
+}
+
+.todo-delete {
+  background-color: var(--red-8);
+  border: none;
+  flex-shrink: 0;
+  min-width: auto;
+  padding: var(--size-1) var(--size-2);
+  border-radius: var(--radius-2);
+}
+
+.todo-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--size-3);
+  flex-wrap: wrap;
+  padding: var(--size-3) 0;
+}
+
+.todo-controls {
+  display: flex;
+  gap: var(--size-2);
+  align-items: stretch;
+}
+
+.todo-toggle-all {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.todo-controls input {
+  flex-grow: 1;
+  margin-bottom: 0;
+}
+
+
+/* 
+    ____  _______    ____________  _____ ______
+   / __ \/ ____/ |  / / ____/ __ \/ ___// ____/
+  / /_/ / __/  | | / / __/ / /_/ /\__ \/ __/   
+ / _, _/ /___  | |/ / /___/ _, _/___/ / /___   
+/_/ |_/_____/  |___/_____/_/ |_|/____/_____/   
+                                               
+*/
+
+.reverse-result {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }

@@ -30,6 +30,10 @@ func run(watch bool) error {
 				InputPath:  "app/features/sortable/web-components/sortable-example.ts",
 				OutputPath: "app/features/sortable/web/static/web-components/sortable-example",
 			},
+			{
+				InputPath:  "app/features/common/styles/styles.css",
+				OutputPath: "app/features/common/web/static/index",
+			},
 		},
 		Outdir:            "./",
 		Bundle:            true,
@@ -41,6 +45,7 @@ func run(watch bool) error {
 		Format:            api.FormatESModule,
 		Sourcemap:         api.SourceMapLinked,
 		Target:            api.ESNext,
+		NodePaths:         []string{"node_modules"},
 	}
 
 	if watch {
