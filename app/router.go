@@ -10,7 +10,6 @@ import (
 	"os"
 	"strconv"
 	"sync"
-	"sync/atomic"
 	"time"
 
 	"northstar/app/features/common"
@@ -28,37 +27,26 @@ import (
 	"github.com/starfederation/datastar-go/datastar"
 )
 
-var buildReloadRequested atomic.Bool
-
 func SetupRoutes(ctx context.Context, router chi.Router) (err error) {
 
+	reloadChan := make(chan struct{}, 1)
 	var hotReloadOnce sync.Once
 	router.Get("/reload", func(w http.ResponseWriter, r *http.Request) {
 		sse := datastar.NewSSE(w, r)
-		hotReloadOnce.Do(func() {
-			sse.ExecuteScript("window.location.reload()")
-		})
-		<-r.Context().Done()
-	})
-
-	router.Get("/build-reload", func(w http.ResponseWriter, r *http.Request) {
-		sse := datastar.NewSSE(w, r)
-
-		for {
-			if buildReloadRequested.CompareAndSwap(true, false) {
-				sse.ExecuteScript("window.location.reload()")
-				return
-			}
-			select {
-			case <-time.After(50 * time.Millisecond):
-			case <-r.Context().Done():
-				return
-			}
+		reload := func() { sse.ExecuteScript("window.location.reload()") }
+		hotReloadOnce.Do(reload)
+		select {
+		case <-reloadChan:
+			reload()
+		case <-r.Context().Done():
 		}
 	})
 
 	router.Get("/force-reload", func(w http.ResponseWriter, r *http.Request) {
-		buildReloadRequested.Store(true)
+		select {
+		case reloadChan <- struct{}{}:
+		default:
+		}
 		w.WriteHeader(http.StatusOK)
 		w.Write([]byte("OK"))
 	})

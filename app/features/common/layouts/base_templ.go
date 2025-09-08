@@ -106,7 +106,7 @@ func Base(title string, stylesheets ...string) templ.Component {
 				return templ_7745c5c3_Err
 			}
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 8, "</head><body><div data-on-load=\"@get('/reload', {retryMaxCount: 1000, retryInterval:20, retryMaxWaitMs:200})\"></div><div data-on-load=\"@get('/build-reload', {retryMaxCount: 1000, retryInterval:20, retryMaxWaitMs:200})\"></div>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 8, "</head><body><div data-on-load=\"@get('/reload', {retryMaxCount: 1000, retryInterval:20, retryMaxWaitMs:200})\"></div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

@@ -21,7 +21,6 @@ templ Base(title string, stylesheets ...string) {
 		</head>
 		<body>
 			<div data-on-load="@get('/reload', {retryMaxCount: 1000, retryInterval:20, retryMaxWaitMs:200})"></div>
-			<div data-on-load="@get('/build-reload', {retryMaxCount: 1000, retryInterval:20, retryMaxWaitMs:200})"></div>
 			{ children... }
 		</body>
 	</html>
