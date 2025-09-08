@@ -8,7 +8,7 @@ import (
 )
 
 templ IndexPage(title string) {
-	@layouts.Base(title, web.StaticPath("index.css")) {
+	@layouts.Base(title, web.StaticPath("styles/index.css")) {
 		<main class="container">
 			@components.Navigation(components.PageIndex)
 			<article>

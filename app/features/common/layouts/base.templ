@@ -14,7 +14,7 @@ templ Base(title string, stylesheets ...string) {
 			<script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
 			<link rel="icon" type="image/x-icon" href={ web.StaticPath("assets/favicon.ico") }/>
 			<script defer type="module" src={ web.StaticPath("datastar/datastar.js") }></script>
-			<link href={ web.StaticPath("index.css") } rel="stylesheet" type="text/css"/>
+			<link href={ web.StaticPath("styles/common.css") } rel="stylesheet" type="text/css"/>
 			for _, stylesheet := range stylesheets {
 				<link href={ stylesheet } rel="stylesheet" type="text/css"/>
 			}

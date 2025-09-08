@@ -82,7 +82,7 @@ func SortablePage() templ.Component {
 			}
 			return nil
 		})
-		templ_7745c5c3_Err = layouts.Base("Sortable", web.StaticPath("index.css")).Render(templ.WithChildren(ctx, templ_7745c5c3_Var2), templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = layouts.Base("Sortable", web.StaticPath("styles/sortable.css")).Render(templ.WithChildren(ctx, templ_7745c5c3_Var2), templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

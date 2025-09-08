@@ -5,6 +5,8 @@ import (
 	"flag"
 	"log/slog"
 	"os"
+	"path/filepath"
+	"strings"
 
 	"github.com/evanw/esbuild/pkg/api"
 )
@@ -19,53 +21,73 @@ func main() {
 	}
 }
 
+func findEntryPoints() ([]api.EntryPoint, error) {
+	var entryPoints []api.EntryPoint
+
+	features, err := filepath.Glob("app/features/*")
+	if err != nil {
+		return nil, err
+	}
+
+	// filter out non-directories
+	var dirs []string
+	for _, feature := range features {
+		if info, err := os.Stat(feature); err == nil && info.IsDir() {
+			dirs = append(dirs, feature)
+		}
+	}
+	features = dirs
+
+	for _, feature := range features {
+		featureName := filepath.Base(feature)
+
+		webComponents, err := filepath.Glob(filepath.Join(feature, "web-components/*.ts"))
+		if err != nil {
+			return nil, err
+		}
+		for _, wc := range webComponents {
+			name := strings.TrimSuffix(filepath.Base(wc), ".ts")
+			entryPoints = append(entryPoints, api.EntryPoint{
+				InputPath:  wc,
+				OutputPath: filepath.Join("app/features", featureName, "web/static/web-components", name),
+			})
+		}
+
+		styles, err := filepath.Glob(filepath.Join(feature, "styles/*.css"))
+		if err != nil {
+			return nil, err
+		}
+		for _, style := range styles {
+			name := strings.TrimSuffix(filepath.Base(style), ".css")
+			entryPoints = append(entryPoints, api.EntryPoint{
+				InputPath:  style,
+				OutputPath: filepath.Join("app/features", featureName, "web/static/styles", name),
+			})
+		}
+	}
+
+	return entryPoints, nil
+}
+
 func run(watch bool) error {
+	entryPoints, err := findEntryPoints()
+	if err != nil {
+		return err
+	}
+
 	opts := api.BuildOptions{
-		EntryPointsAdvanced: []api.EntryPoint{
-			{
-				InputPath:  "app/features/reverse/web-components/reverse-component.ts",
-				OutputPath: "app/features/reverse/web/static/web-components/reverse-component",
-			},
-			{
-				InputPath:  "app/features/sortable/web-components/sortable-example.ts",
-				OutputPath: "app/features/sortable/web/static/web-components/sortable-example",
-			},
-			{
-				InputPath:  "app/features/common/styles/styles.css",
-				OutputPath: "app/features/common/web/static/index",
-			},
-			{
-				InputPath:  "app/features/sortable/styles/styles.css",
-				OutputPath: "app/features/sortable/web/static/index",
-			},
-			{
-				InputPath:  "app/features/counter/styles/styles.css",
-				OutputPath: "app/features/counter/web/static/index",
-			},
-			{
-				InputPath:  "app/features/index/styles/styles.css",
-				OutputPath: "app/features/index/web/static/index",
-			},
-			{
-				InputPath:  "app/features/reverse/styles/styles.css",
-				OutputPath: "app/features/reverse/web/static/index",
-			},
-			{
-				InputPath:  "app/features/monitor/styles/styles.css",
-				OutputPath: "app/features/monitor/web/static/index",
-			},
-		},
-		Outdir:            "./",
-		Bundle:            true,
-		Write:             true,
-		LogLevel:          api.LogLevelInfo,
-		MinifyWhitespace:  true,
-		MinifyIdentifiers: true,
-		MinifySyntax:      true,
-		Format:            api.FormatESModule,
-		Sourcemap:         api.SourceMapLinked,
-		Target:            api.ESNext,
-		NodePaths:         []string{"node_modules"},
+		EntryPointsAdvanced: entryPoints,
+		Outdir:              "./",
+		Bundle:              true,
+		Write:               true,
+		LogLevel:            api.LogLevelInfo,
+		MinifyWhitespace:    true,
+		MinifyIdentifiers:   true,
+		MinifySyntax:        true,
+		Format:              api.FormatESModule,
+		Sourcemap:           api.SourceMapLinked,
+		Target:              api.ESNext,
+		NodePaths:           []string{"node_modules"},
 	}
 
 	if watch {

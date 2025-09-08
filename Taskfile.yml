@@ -13,23 +13,21 @@ tasks:
     generates:
       - "**/*_templ.go"
 
-  build:wc:
+  build:web:
     cmds:
       - go run cmd/web/build/main.go
     sources:
-      - "./app/**/*.html"
-      - "./app/**/*.css"
-      - "./app/**/*.ts"
+      - "./app/features/*/styles/*.css"
+      - "./app/features/*/web-components/*.ts"
     generates:
-      - "**/web-components/**"
-      - "app/features/common/web/static/index.css"
+      - "./app/features/*/web/static/**"
 
   build:
     cmds:
       - go build -o bin/main ./cmd/web
     deps:
       - build:templ
-      - build:wc
+      - build:web
 
   # Use this task to debug with the delve debugger
   debug:
@@ -49,7 +47,7 @@ tasks:
     cmds:
       - go tool templ generate -watch
 
-  live:wc:
+  live:web:
     cmds:
       - go run cmd/web/build/main.go -watch
 
@@ -66,7 +64,7 @@ tasks:
   live:
     deps:
       - live:templ
-      - live:wc
+      - live:web
       - live:server
 
   run:
@@ -74,6 +72,10 @@ tasks:
       - ./bin/main
     deps:
       - build
+
+  clean:static:
+    cmds:
+      - find ./app/features/*/web/static -mindepth 1 -maxdepth 1 ! -name "assets" ! -name "datastar" -exec rm -rf {} +
 
   default:
     cmds:

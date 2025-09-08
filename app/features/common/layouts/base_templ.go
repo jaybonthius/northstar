@@ -75,9 +75,9 @@ func Base(title string, stylesheets ...string) templ.Component {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var5 templ.SafeURL
-		templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinURLErrs(web.StaticPath("index.css"))
+		templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinURLErrs(web.StaticPath("styles/common.css"))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `app/features/common/layouts/base.templ`, Line: 17, Col: 43}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `app/features/common/layouts/base.templ`, Line: 17, Col: 51}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var5))
 		if templ_7745c5c3_Err != nil {

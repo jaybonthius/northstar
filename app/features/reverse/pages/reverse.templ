@@ -7,7 +7,7 @@ import (
 )
 
 templ ReversePage() {
-	@layouts.Base("Reverse Web Component", web.StaticPath("index.css")) {
+	@layouts.Base("Reverse Web Component", web.StaticPath("styles/reverse.css")) {
 		<main class="container">
 			@components.Navigation(components.PageReverse)
 			<article>
