@@ -8,6 +8,7 @@ import (
 	"net/http"
 	app "northstar/app"
 	"northstar/config"
+	"northstar/logger"
 	"os"
 	"os/signal"
 	"syscall"
@@ -22,22 +23,7 @@ func main() {
 	ctx, cancel := signal.NotifyContext(context.Background(), syscall.SIGINT, syscall.SIGTERM)
 	defer cancel()
 
-	logger := slog.New(slog.NewJSONHandler(os.Stdout, &slog.HandlerOptions{
-		Level: func() slog.Level {
-			switch config.Global.LogLevel {
-			case "DEBUG":
-				return slog.LevelDebug
-			case "INFO":
-				return slog.LevelInfo
-			case "WARN":
-				return slog.LevelWarn
-			case "ERROR":
-				return slog.LevelError
-			default:
-				return slog.LevelInfo
-			}
-		}(),
-	}))
+	logger := logger.CreateLogger()
 	slog.SetDefault(logger)
 
 	if err := run(ctx); err != nil && err != http.ErrServerClosed {
