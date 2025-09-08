@@ -7,6 +7,7 @@ import (
 	"net"
 	"net/http"
 	app "northstar/app"
+	"northstar/config"
 	"os"
 	"os/signal"
 	"syscall"
@@ -14,19 +15,16 @@ import (
 
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
-	"github.com/joho/godotenv"
 	"golang.org/x/sync/errgroup"
 )
 
 func main() {
-	godotenv.Load()
-
 	ctx, cancel := signal.NotifyContext(context.Background(), syscall.SIGINT, syscall.SIGTERM)
 	defer cancel()
 
 	logger := slog.New(slog.NewJSONHandler(os.Stdout, &slog.HandlerOptions{
 		Level: func() slog.Level {
-			switch os.Getenv("LOG_LEVEL") {
+			switch config.Global.LogLevel {
 			case "DEBUG":
 				return slog.LevelDebug
 			case "INFO":
@@ -49,18 +47,10 @@ func main() {
 }
 
 func run(ctx context.Context) error {
-	getEnv := func(key, fallback string) string {
-		if val, ok := os.LookupEnv(key); ok {
-			return val
-		}
-		return fallback
-	}
+	slog.Info("Configuration loaded", "host", config.Global.Host, "port", config.Global.Port, "log_level", config.Global.LogLevel, "environment", config.Global.Environment)
 
-	host := getEnv("HOST", "0.0.0.0")
-	port := getEnv("PORT", "8080")
-
-	addr := fmt.Sprintf("%s:%s", host, port)
-	slog.Info("server started", "host", host, "port", port)
+	addr := fmt.Sprintf("%s:%s", config.Global.Host, config.Global.Port)
+	slog.Info("server started", "host", config.Global.Host, "port", config.Global.Port)
 	defer slog.Info("server shutdown complete")
 
 	eg, egctx := errgroup.WithContext(ctx)

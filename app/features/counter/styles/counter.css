@@ -1,6 +1,6 @@
 .counter-button {
   background-color: var(--cyan-6);
-  border: none
+  border: none;
 }
 
 .counter-buttons-container {
@@ -31,4 +31,3 @@
 .counter-value {
   font-size: var(--font-size-5);
 }
-

@@ -1,0 +1,8 @@
+# TODO: add `fail_on_change` when this PR gets merged
+# https://github.com/evilmartians/lefthook/pull/1095
+pre-commit:
+  commands:
+    build:
+      run: task build
+    fmt:
+      run: task fmt

@@ -3,7 +3,10 @@ package main
 import (
 	"errors"
 	"flag"
+	"fmt"
 	"log/slog"
+	"net/http"
+	"northstar/config"
 	"os"
 	"path/filepath"
 	"strings"
@@ -88,6 +91,19 @@ func run(watch bool) error {
 		Sourcemap:           api.SourceMapLinked,
 		Target:              api.ESNext,
 		NodePaths:           []string{"node_modules"},
+		Plugins: []api.Plugin{{
+			Name: "reload-trigger",
+			Setup: func(build api.PluginBuild) {
+				build.OnEnd(func(result *api.BuildResult) (api.OnEndResult, error) {
+					slog.Info("build complete", "errors", len(result.Errors), "warnings", len(result.Warnings))
+					if watch && len(result.Errors) == 0 {
+						slog.Info("triggering reload!")
+						http.Get(fmt.Sprintf("http://%s:%s/force-reload", config.Global.Host, config.Global.Port))
+					}
+					return api.OnEndResult{}, nil
+				})
+			},
+		}},
 	}
 
 	if watch {

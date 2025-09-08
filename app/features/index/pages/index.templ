@@ -4,11 +4,11 @@ import (
 	"github.com/starfederation/datastar-go/datastar"
 	"northstar/app/features/common/components"
 	"northstar/app/features/common/layouts"
-	web "northstar/app/features/index/web"
+	"northstar/app/static"
 )
 
 templ IndexPage(title string) {
-	@layouts.Base(title, web.StaticPath("styles/index.css")) {
+	@layouts.Base(title, static.StaticPath("index", "styles/index.css")) {
 		<main class="container">
 			@components.Navigation(components.PageIndex)
 			<article>

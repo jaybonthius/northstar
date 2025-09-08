@@ -3,11 +3,11 @@ package pages
 import (
 	"northstar/app/features/common/components"
 	"northstar/app/features/common/layouts"
-	"northstar/app/features/sortable/web"
+	"northstar/app/static"
 )
 
 templ SortablePage() {
-	@layouts.Base("Sortable", web.StaticPath("styles/sortable.css")) {
+	@layouts.Base("Sortable", static.StaticPath("sortable", "styles/sortable.css")) {
 		<main class="container">
 			@components.Navigation(components.PageSortable)
 			<article>
@@ -26,7 +26,7 @@ templ SortablePage() {
 					data-attr-items="JSON.stringify($items)"
 					data-on-change="event.detail && console.log(`Send this data somewhere else! ${event.detail}`)"
 				></sortable-example>
-				<script type="module" src={ web.StaticPath("web-components/sortable-example.js") }></script>
+				<script type="module" src={ static.StaticPath("sortable", "web-components/sortable-example.js") }></script>
 			</article>
 		</main>
 	}

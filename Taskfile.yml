@@ -17,14 +17,16 @@ tasks:
     cmds:
       - go run cmd/web/build/main.go
     sources:
-      - "./app/features/*/styles/*.css"
-      - "./app/features/*/web-components/*.ts"
+      - "**/*.css"
+      - "**/*.ts"
+      - "**/*.js"
+      - exclude: "**/static/**/*.{css,ts,js}"
     generates:
       - "./app/features/*/web/static/**"
 
   build:
     cmds:
-      - go build -o bin/main ./cmd/web
+      - go build -tags=prod -o bin/main ./cmd/web
     deps:
       - build:templ
       - build:web
@@ -55,10 +57,10 @@ tasks:
     cmds:
       - |
         go tool air  \
-         -build.cmd "go build -o tmp/bin/main ./cmd/web" \
+         -build.cmd "go build -tags=dev -o tmp/bin/main ./cmd/web" \
          -build.bin "tmp/bin/main" \
          -build.exclude_dir "data,node_modules" \
-         -build.include_ext "go,templ,js,css" \
+         -build.include_ext "go,templ" \
          -misc.clean_on_exit "true"
 
   live:
@@ -76,6 +78,41 @@ tasks:
   clean:static:
     cmds:
       - find ./app/features/*/web/static -mindepth 1 -maxdepth 1 ! -name "assets" ! -name "datastar" -exec rm -rf {} +
+
+  fmt:go:
+    cmds:
+      - go fmt ./...
+    sources:
+      - "**/*.go"
+      - exclude: "**/*_templ.go"
+
+  fmt:templ:
+    cmds:
+      - go tool templ fmt .
+    sources:
+      - "**/*.templ"
+
+  fmt:ts:
+    cmds:
+      - pnpm prettier --write "**/*.{ts,js}"
+    sources:
+      - "**/*.ts"
+      - "**/*.js"
+      - exclude: "**/static/**/*.{ts,js}"
+
+  fmt:css:
+    cmds:
+      - pnpm prettier --write "**/*.css"
+    sources:
+      - "**/*.css"
+      - exclude: "**/static/**/*.css"
+
+  fmt:
+    deps:
+      - fmt:go
+      - fmt:templ
+      - fmt:ts
+      - fmt:css
 
   default:
     cmds:

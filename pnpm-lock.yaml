@@ -11,6 +11,9 @@ importers:
       '@types/node':
         specifier: ^24.0.14
         version: 24.0.14
+      prettier:
+        specifier: ^3.6.2
+        version: 3.6.2
 
   app/features/common:
     dependencies:
@@ -75,6 +78,11 @@ packages:
   open-props@1.7.16:
     resolution: {integrity: sha512-9dGv6wtah34stwweJytNEcCB0NG9HeV9wVsyr7Bs8RkKgrx2v0qIRi+9LQa5569nPbOpCOFF5nOxCPdKw30RAA==}
 
+  prettier@3.6.2:
+    resolution: {integrity: sha512-I7AIg5boAr5R0FFtJ6rCfD+LFsWHp81dolrFD8S79U9tb8Az2nGrJncnMSnys+bpQJfRUzqs9hnA81OAA3hCuQ==}
+    engines: {node: '>=14'}
+    hasBin: true
+
   sortablejs@1.15.6:
     resolution: {integrity: sha512-aNfiuwMEpfBM/CN6LY0ibyhxPfPbyFeBTYJKCvzkJ2GkUpazIt3H+QIPAMHwqQ7tMKaHz1Qj+rJJCqljnf4p3A==}
 
@@ -121,6 +129,8 @@ snapshots:
       lit-html: 3.3.1
 
   open-props@1.7.16: {}
+
+  prettier@3.6.2: {}
 
   sortablejs@1.15.6: {}
 

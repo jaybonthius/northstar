@@ -7,6 +7,7 @@ import (
 	"log/slog"
 	"net"
 	"net/http"
+	"northstar/config"
 	"os"
 	"strconv"
 	"sync"
@@ -28,15 +29,29 @@ import (
 )
 
 func SetupRoutes(ctx context.Context, router chi.Router) (err error) {
-
+	reloadChan := make(chan struct{}, 1)
 	var hotReloadOnce sync.Once
 	router.Get("/reload", func(w http.ResponseWriter, r *http.Request) {
 		sse := datastar.NewSSE(w, r)
-		hotReloadOnce.Do(func() {
-			sse.ExecuteScript("window.location.reload()")
-		})
-		<-r.Context().Done()
+		reload := func() { sse.ExecuteScript("window.location.reload()") }
+		hotReloadOnce.Do(reload)
+		select {
+		case <-reloadChan:
+			reload()
+		case <-r.Context().Done():
+		}
 	})
+
+	if config.Global.Environment == config.Dev {
+		router.Get("/force-reload", func(w http.ResponseWriter, r *http.Request) {
+			select {
+			case reloadChan <- struct{}{}:
+			default:
+			}
+			w.WriteHeader(http.StatusOK)
+			w.Write([]byte("OK"))
+		})
+	}
 
 	natsPort, err := getFreeNatsPort()
 	if err != nil {

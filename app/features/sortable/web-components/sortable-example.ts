@@ -38,12 +38,10 @@ export class SortableExample extends LitElement {
     console.log(this)
     return html`
       <div class="sortable-wrapper">
-          <div class="sortable-title">${this.title}: <strong>${this.value}</strong></div>
-          <div>Open your console to see event results</div>
-          <div id="sortable-container" class="sortable-container">
-            ${this.items?.length > 0 && this.items.map(
-              (item) => html` <div class="sortable-item">${item.name}</div> `,
-            )}
+        <div class="sortable-title">${this.title}: <strong>${this.value}</strong></div>
+        <div>Open your console to see event results</div>
+        <div id="sortable-container" class="sortable-container">
+          ${this.items?.length > 0 && this.items.map((item) => html` <div class="sortable-item">${item.name}</div> `)}
         </div>
       </div>
     `

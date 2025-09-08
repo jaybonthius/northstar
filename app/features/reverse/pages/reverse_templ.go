@@ -11,7 +11,7 @@ import templruntime "github.com/a-h/templ/runtime"
 import (
 	"northstar/app/features/common/components"
 	"northstar/app/features/common/layouts"
-	"northstar/app/features/reverse/web"
+	"northstar/app/static"
 )
 
 func ReversePage() templ.Component {
@@ -60,9 +60,9 @@ func ReversePage() templ.Component {
 				return templ_7745c5c3_Err
 			}
 			var templ_7745c5c3_Var3 string
-			templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(web.StaticPath("web-components/reverse-component.js"))
+			templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(static.StaticPath("reverse", "web-components/reverse-component.js"))
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `app/features/reverse/pages/reverse.templ`, Line: 26, Col: 83}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `app/features/reverse/pages/reverse.templ`, Line: 26, Col: 97}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
 			if templ_7745c5c3_Err != nil {
@@ -74,7 +74,7 @@ func ReversePage() templ.Component {
 			}
 			return nil
 		})
-		templ_7745c5c3_Err = layouts.Base("Reverse Web Component", web.StaticPath("styles/reverse.css")).Render(templ.WithChildren(ctx, templ_7745c5c3_Var2), templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = layouts.Base("Reverse Web Component", static.StaticPath("reverse", "styles/reverse.css")).Render(templ.WithChildren(ctx, templ_7745c5c3_Var2), templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
