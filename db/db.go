@@ -35,8 +35,6 @@ func InitDatabase() (*sql.DB, error) {
 	}
 
 	slog.Info("running database migrations")
-
-	// Run auth migrations first
 	goose.SetBaseFS(MigrationFiles)
 	if err = goose.Up(database, "migrations"); err != nil {
 		if closeErr := database.Close(); closeErr != nil {
