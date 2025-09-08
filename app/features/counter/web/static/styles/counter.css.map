@@ -1,7 +1,7 @@
 {
   "version": 3,
   "sources": ["../../../styles/counter.css"],
-  "sourcesContent": [".counter-button {\n  background-color: var(--cyan-6);\n  border: none\n}\n\n.counter-buttons-container {\n  display: flex;\n  justify-content: space-around;\n  gap: var(--size-4);\n  margin-bottom: var(--size-3);\n}\n\n.counter-counts-container {\n  display: flex;\n  justify-content: space-around;\n  gap: var(--size-4);\n}\n\n.counter-count {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  gap: var(--size-1);\n}\n\n.counter-label {\n  font-size: var(--font-size-3);\n  font-weight: var(--font-weight-6);\n}\n\n.counter-value {\n  font-size: var(--font-size-5);\n}\n\n"],
+  "sourcesContent": [".counter-button {\n  background-color: var(--cyan-6);\n  border: none;\n}\n\n.counter-buttons-container {\n  display: flex;\n  justify-content: space-around;\n  gap: var(--size-4);\n  margin-bottom: var(--size-3);\n}\n\n.counter-counts-container {\n  display: flex;\n  justify-content: space-around;\n  gap: var(--size-4);\n}\n\n.counter-count {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  gap: var(--size-1);\n}\n\n.counter-label {\n  font-size: var(--font-size-3);\n  font-weight: var(--font-weight-6);\n}\n\n.counter-value {\n  font-size: var(--font-size-5);\n}\n"],
   "mappings": "AAAA,CAAC,eACC,iBAAkB,IAAI,UACtB,OAAQ,IACV,CAEA,CAAC,0BACC,QAAS,KACT,gBAAiB,aACjB,IAAK,IAAI,UACT,cAAe,IAAI,SACrB,CAEA,CAAC,yBACC,QAAS,KACT,gBAAiB,aACjB,IAAK,IAAI,SACX,CAEA,CAAC,cACC,QAAS,KACT,eAAgB,OAChB,YAAa,OACb,IAAK,IAAI,SACX,CAEA,CAAC,cACC,UAAW,IAAI,eACf,YAAa,IAAI,gBACnB,CAEA,CAAC,cACC,UAAW,IAAI,cACjB",
   "names": []
 }
