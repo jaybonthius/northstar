@@ -47,6 +47,8 @@ func main() {
 }
 
 func run(ctx context.Context) error {
+	slog.Info("Configuration loaded", "host", config.Global.Host, "port", config.Global.Port, "log_level", config.Global.LogLevel, "environment", config.Global.Environment)
+
 	addr := fmt.Sprintf("%s:%s", config.Global.Host, config.Global.Port)
 	slog.Info("server started", "host", config.Global.Host, "port", config.Global.Port)
 	defer slog.Info("server shutdown complete")
