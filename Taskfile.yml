@@ -13,36 +13,21 @@ tasks:
     generates:
       - "**/*_templ.go"
 
-  # TODO: make this per-feature CSS
-  build:styles:
-    cmds:
-      - go tool gotailwind -i app/features/common/styles/styles.css -o app/features/common/web/static/index.css
-    sources:
-      - "./app/**/*.html"
-      - "./app/**/*.ts"
-      - "./app/**/*.templ"
-      - "./app/**/*.go"
-      - "./app/**/*.css"
-    generates:
-      - "app/features/common/web/static/index.css"
-
-  build:wc:
+  build:web:
     cmds:
       - go run cmd/web/build/main.go
     sources:
-      - "./app/**/*.html"
-      - "./app/**/*.css"
-      - "./app/**/*.ts"
+      - "./app/features/*/styles/*.css"
+      - "./app/features/*/web-components/*.ts"
     generates:
-      - "**/web-components/**"
+      - "./app/features/*/web/static/**"
 
   build:
     cmds:
       - go build -o bin/main ./cmd/web
     deps:
       - build:templ
-      - build:styles
-      - build:wc
+      - build:web
 
   # Use this task to debug with the delve debugger
   debug:
@@ -62,12 +47,7 @@ tasks:
     cmds:
       - go tool templ generate -watch
 
-  # TODO: make this per-feature CSS
-  live:styles:
-    cmds:
-      - go tool gotailwind -i app/features/common/styles/styles.css -o app/features/common/web/static/index.css -w
-  
-  live:wc:
+  live:web:
     cmds:
       - go run cmd/web/build/main.go -watch
 
@@ -84,8 +64,7 @@ tasks:
   live:
     deps:
       - live:templ
-      - live:styles
-      - live:wc
+      - live:web
       - live:server
 
   run:
@@ -93,6 +72,10 @@ tasks:
       - ./bin/main
     deps:
       - build
+
+  clean:static:
+    cmds:
+      - find ./app/features/*/web/static -mindepth 1 -maxdepth 1 ! -name "assets" ! -name "datastar" -exec rm -rf {} +
 
   default:
     cmds:

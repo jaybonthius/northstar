@@ -7,20 +7,22 @@ import (
 )
 
 templ ReversePage() {
-	@layouts.Base("Reverse Web Component") {
-		@components.Navigation(components.PageReverse)
-		<div
-			class="h-screen flex justify-center items-center"
-		>
-			<div class="border border-primary rounded flex flex-col gap-2 p-8 w-80">
-				<label class="input">
-					<span class="label">Reverse</span>
-					<input type="text" data-bind-_name=""/>
-				</label>
-				<p class="truncate" data-signals-_reversed="" data-text="$_reversed"></p>
-				<reverse-component data-on-reverse="$_reversed = evt.detail.value" data-attr-name="$_name"></reverse-component>
-			</div>
-		</div>
+	@layouts.Base("Reverse Web Component", web.StaticPath("styles/reverse.css")) {
+		<main class="container">
+			@components.Navigation(components.PageReverse)
+			<article>
+				<div>
+					<div>
+						<label>
+							<span>Reverse</span>
+							<input type="text" data-bind-_name=""/>
+						</label>
+						<p class="reverse-result" data-signals-_reversed="" data-text="$_reversed"></p>
+						<reverse-component data-on-reverse="$_reversed = evt.detail.value" data-attr-name="$_name"></reverse-component>
+					</div>
+				</div>
+			</article>
+		</main>
 		<script type="module" src={ web.StaticPath("web-components/reverse-component.js") }></script>
 	}
 }

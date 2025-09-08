@@ -56,24 +56,28 @@ func MonitorPage() templ.Component {
 				}()
 			}
 			ctx = templ.InitializeContext(ctx)
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<main class=\"container\">")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
 			templ_7745c5c3_Err = components.Navigation(components.PageMonitor).Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, " <div id=\"container\" data-on-load=\"")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "<article><div id=\"container\" data-on-load=\"")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
 			var templ_7745c5c3_Var3 string
 			templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(datastar.GetSSE("/monitor/events"))
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `app/features/monitor/pages/monitor.templ`, Line: 23, Col: 52}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `app/features/monitor/pages/monitor.templ`, Line: 25, Col: 54}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "\" class=\"h-screen flex justify-center items-center\" data-signals=\"{memTotal:'', memUsed:'', memUsedPercent:'', cpuUser:'', cpuSystem:'', cpuIdle:''}\"><div class=\"border border-primary rounded flex gap-8 p-8\"><div id=\"mem\" class=\"flex flex-col\"><h1 class=\"text-center pb-2 text-xl\">Memory</h1><p>Total: <span data-text=\"$memTotal\"></span></p><p>Used: <span data-text=\"$memUsed\"></span></p><p>Used (%): <span data-text=\"$memUsedPercent\"></span></p></div><div id=\"cpu\" class=\"flex flex-col\"><h1 class=\"text-center pb-2 text-xl\">CPU</h1><p>User: <span data-text=\"$cpuUser\"></span></p><p>System: <span data-text=\"$cpuSystem\"></span></p><p>Idle: <span data-text=\"$cpuIdle\"></span></p></div></div></div>")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "\" data-signals=\"{memTotal:'', memUsed:'', memUsedPercent:'', cpuUser:'', cpuSystem:'', cpuIdle:''}\"><div class=\"grid\"><div id=\"mem\"><h1>Memory</h1><p>Total: <span data-text=\"$memTotal\"></span></p><p>Used: <span data-text=\"$memUsed\"></span></p><p>Used (%): <span data-text=\"$memUsedPercent\"></span></p></div><div id=\"cpu\"><h1>CPU</h1><p>User: <span data-text=\"$cpuUser\"></span></p><p>System: <span data-text=\"$cpuSystem\"></span></p><p>Idle: <span data-text=\"$cpuIdle\"></span></p></div></div></div></article></main>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

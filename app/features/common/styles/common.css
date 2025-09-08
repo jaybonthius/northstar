@@ -1,0 +1,111 @@
+@import "@picocss/pico/css/pico.min.css";
+@import "open-props/style";
+
+:root {
+  --pico-font-family: var(--font-monospace-code);
+  --pico-nav-element-spacing-horizontal: 0.75rem;
+}
+
+/* light color scheme (Default) */
+/* Can be forced with data-theme="light" */
+[data-theme=light],
+:root:not([data-theme=dark]),
+:host:not([data-theme=dark]) {
+  --pico-text-selection-color: var(--purple-3);
+  --pico-primary: var(--purple-8);
+  --pico-primary-background: var(--purple-7);
+  --pico-primary-underline: var(--purple-6);
+  --pico-primary-hover: var(--purple-9);
+  --pico-primary-hover-background: var(--purple-8);
+  --pico-primary-focus: var(--purple-5);
+  --pico-primary-inverse: #fff;
+  --alert: var(--orange-11);
+  --alert-link: var(--orange-11);
+  --alert-background: var(--orange-1);
+  --alert-border: var(--orange-7);
+}
+
+/* dark color scheme (Auto) */
+/* Automatically enabled if user has Dark mode enabled */
+@media only screen and (prefers-color-scheme: dark) {
+  :root:not([data-theme]),
+  :host:not([data-theme]) {
+    --pico-text-selection-color: var(--purple-4);
+    --pico-primary: var(--purple-4);
+    --pico-primary-background: var(--purple-7);
+    --pico-primary-underline: var(--purple-5);
+    --pico-primary-hover: var(--purple-2);
+    --pico-primary-hover-background: var(--purple-6);
+    --pico-primary-focus: var(--purple-3);
+    --pico-primary-inverse: #fff;
+  --alert: var(--orange-1);
+  --alert-link: var(--orange-1);
+  --alert-background: var(--orange-11);
+  --alert-border: var(--orange-4);
+  }
+}
+/* dark color scheme (Forced) */
+/* Enabled if forced with data-theme="dark" */
+[data-theme=dark] {
+  --pico-text-selection-color: var(--purple-4);
+  --pico-primary: var(--purple-4);
+  --pico-primary-background: var(--purple-7);
+  --pico-primary-underline: var(--purple-5);
+  --pico-primary-hover: var(--purple-2);
+  --pico-primary-hover-background: var(--purple-6);
+  --pico-primary-focus: var(--purple-3);
+  --pico-primary-inverse: #fff;
+  --alert: var(--orange-3);
+  --alert-link: var(--orange-3);
+  --alert-background: var(--orange-5);
+  --alert-border: var(--orange-11);
+}
+
+.active-nav-item {
+  background-color: var(--purple-1);
+  color: var(--purple-9);
+  padding: var(--size-1) var(--size-2);
+  font-weight: var(--font-weight-6);
+}
+
+.alert {
+  background-color: var(--alert-background);
+  color: var(--alert);
+  border: var(--border-size-1) solid var(--alert-border);
+  padding: var(--size-3);
+  text-align: center;
+  display: flex;
+  align-items: center;
+  gap: var(--size-2);
+  margin-bottom: var(--size-4);
+}
+
+.alert-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-2);
+}
+
+.alert-link {
+  color: var(--alert-link);
+  text-decoration: underline;
+}
+
+.loading-indicator {
+  display: inline-block;
+}
+
+.loading-indicator.is-loading {
+  opacity: 0.6;
+  pointer-events: none;
+  margin-left: 1rem;
+}
+
+
+
+
+
+
+
+
+

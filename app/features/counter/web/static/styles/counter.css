@@ -1,0 +1,2 @@
+.counter-button{background-color:var(--cyan-6);border:none}.counter-buttons-container{display:flex;justify-content:space-around;gap:var(--size-4);margin-bottom:var(--size-3)}.counter-counts-container{display:flex;justify-content:space-around;gap:var(--size-4)}.counter-count{display:flex;flex-direction:column;align-items:center;gap:var(--size-1)}.counter-label{font-size:var(--font-size-3);font-weight:var(--font-weight-6)}.counter-value{font-size:var(--font-size-5)}
+/*# sourceMappingURL=counter.css.map */

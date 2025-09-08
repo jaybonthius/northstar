@@ -4,6 +4,7 @@ import (
 	"github.com/starfederation/datastar-go/datastar"
 	"northstar/app/features/common/components"
 	"northstar/app/features/common/layouts"
+	web "northstar/app/features/counter/web"
 )
 
 type CounterSignals struct {
@@ -12,15 +13,15 @@ type CounterSignals struct {
 }
 
 templ CounterButtons() {
-	<div class="flex justify-around gap-4">
+	<div class="counter-buttons-container">
 		<button
-			class="btn btn-info"
+			class="counter-button"
 			data-on-click={ datastar.PostSSE("/counter/increment/global") }
 		>
 			Increment Global
 		</button>
 		<button
-			class="btn btn-success"
+			class="counter-button"
 			data-on-click={ datastar.PostSSE("/counter/increment/user") }
 		>
 			Increment User
@@ -29,14 +30,14 @@ templ CounterButtons() {
 }
 
 templ CounterCounts() {
-	<div class="flex justify-around gap-4">
-		<div class="flex flex-col items-center gap-1">
-			<div class="text-lg font-bold">Global</div>
-			<div class="text-2xl" data-text="$global"></div>
+	<div class="counter-counts-container">
+		<div class="counter-count">
+			<div class="counter-label">Global</div>
+			<div class="counter-value" data-text="$global"></div>
 		</div>
-		<div class="flex flex-col items-center gap-1">
-			<div class="text-lg font-bold">User</div>
-			<div class="text-2xl" data-text="$user"></div>
+		<div class="counter-count">
+			<div class="counter-label">User</div>
+			<div class="counter-value" data-text="$user"></div>
 		</div>
 	</div>
 }
@@ -45,7 +46,6 @@ templ Counter(signals CounterSignals) {
 	<div
 		id="container"
 		data-signals={ templ.JSONString(signals) }
-		class="flex flex-col gap-4"
 	>
 		@CounterButtons()
 		@CounterCounts()
@@ -53,10 +53,12 @@ templ Counter(signals CounterSignals) {
 }
 
 templ CounterPage() {
-	@layouts.Base("Counter") {
-		@components.Navigation(components.PageCounter)
-		<article class="prose mx-auto m-2">
-			<div id="container" data-on-load={ datastar.GetSSE("/counter/data") }></div>
-		</article>
+	@layouts.Base("Counter", web.StaticPath("styles/counter.css")) {
+		<main class="container">
+			@components.Navigation(components.PageCounter)
+			<article>
+				<div id="container" data-on-load={ datastar.GetSSE("/counter/data") }></div>
+			</article>
+		</main>
 	}
 }

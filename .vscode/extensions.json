@@ -5,7 +5,7 @@
 	// List of extensions which should be recommended for users of this workspace.
 	"recommendations": [
 		"a-h.templ",
-		"bradlc.vscode-tailwindcss",
+		"phoenisx.cssvar",
 		"golang.go",
 		"runem.lit-plugin"
 	],

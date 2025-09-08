@@ -17,27 +17,30 @@ type SystemMonitorSignals struct {
 
 templ MonitorPage() {
 	@layouts.Base("System Monitoring") {
-		@components.Navigation(components.PageMonitor)
-		<div
-			id="container"
-			data-on-load={ datastar.GetSSE("/monitor/events") }
-			class="h-screen flex justify-center items-center"
-			data-signals="{memTotal:'', memUsed:'', memUsedPercent:'', cpuUser:'', cpuSystem:'', cpuIdle:''}"
-		>
-			<div class="border border-primary rounded flex gap-8 p-8">
-				<div id="mem" class="flex flex-col">
-					<h1 class="text-center pb-2 text-xl">Memory</h1>
-					<p>Total: <span data-text="$memTotal"></span></p>
-					<p>Used: <span data-text="$memUsed"></span></p>
-					<p>Used (%): <span data-text="$memUsedPercent"></span></p>
+		<main class="container">
+			@components.Navigation(components.PageMonitor)
+			<article>
+				<div
+					id="container"
+					data-on-load={ datastar.GetSSE("/monitor/events") }
+					data-signals="{memTotal:'', memUsed:'', memUsedPercent:'', cpuUser:'', cpuSystem:'', cpuIdle:''}"
+				>
+					<div class="grid">
+						<div id="mem">
+							<h1>Memory</h1>
+							<p>Total: <span data-text="$memTotal"></span></p>
+							<p>Used: <span data-text="$memUsed"></span></p>
+							<p>Used (%): <span data-text="$memUsedPercent"></span></p>
+						</div>
+						<div id="cpu">
+							<h1>CPU</h1>
+							<p>User: <span data-text="$cpuUser"></span></p>
+							<p>System: <span data-text="$cpuSystem"></span></p>
+							<p>Idle: <span data-text="$cpuIdle"></span></p>
+						</div>
+					</div>
 				</div>
-				<div id="cpu" class="flex flex-col">
-					<h1 class="text-center pb-2 text-xl">CPU</h1>
-					<p>User: <span data-text="$cpuUser"></span></p>
-					<p>System: <span data-text="$cpuSystem"></span></p>
-					<p>Idle: <span data-text="$cpuIdle"></span></p>
-				</div>
-			</div>
-		</div>
+			</article>
+		</main>
 	}
 }

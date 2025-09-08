@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../styles/reverse.css"],
+  "sourcesContent": [".reverse-result {\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n}\n"],
+  "mappings": "AAAA,CAAC,eACC,SAAU,OACV,cAAe,SACf,YAAa,MACf",
+  "names": []
+}

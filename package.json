@@ -5,9 +5,6 @@
   "workspaces": [
     "app/features/*"
   ],
-  "scripts": {
-    "build:web": "go run cmd/web/build/main.go"
-  },
   "devDependencies": {
     "@types/node": "^24.0.14"
   }

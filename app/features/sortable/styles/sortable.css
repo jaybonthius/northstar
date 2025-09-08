@@ -1,0 +1,32 @@
+.sortable-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-2);
+  padding: var(--size-3);
+  border: var(--border-size-1) solid var(--pico-primary);
+  border-radius: var(--radius-2);
+}
+
+.sortable-title {
+  font-size: var(--font-size-2);
+}
+
+.sortable-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-3);
+}
+
+.sortable-item {
+  background-color: var(--pico-primary);
+  color: var(--pico-primary-inverse);
+  padding: var(--size-3);
+  border-radius: var(--radius-2);
+  cursor: move;
+}
+
+.sortable-example {
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-8);
+}

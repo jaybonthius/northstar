@@ -12,17 +12,13 @@ import (
 	"sync"
 	"time"
 
-	commonWeb "northstar/app/features/common/web"
-	reverseWeb "northstar/app/features/reverse/web"
-	sortableWeb "northstar/app/features/sortable/web"
+	"northstar/app/features/common"
+	"northstar/app/features/counter"
+	"northstar/app/features/index"
+	"northstar/app/features/monitor"
+	"northstar/app/features/reverse"
+	"northstar/app/features/sortable"
 
-	counterFeature "northstar/app/features/counter"
-	indexFeature "northstar/app/features/index"
-	monitorFeature "northstar/app/features/monitor"
-	reverseFeature "northstar/app/features/reverse"
-	sortableFeature "northstar/app/features/sortable"
-
-	"github.com/benbjohnson/hashfs"
 	"github.com/delaneyj/toolbelt"
 	"github.com/delaneyj/toolbelt/embeddednats"
 	"github.com/go-chi/chi/v5"
@@ -41,10 +37,6 @@ func SetupRoutes(ctx context.Context, router chi.Router) (err error) {
 		})
 		<-r.Context().Done()
 	})
-
-	router.Handle("/common/static/*", http.StripPrefix("/common", hashfs.FileServer(commonWeb.StaticSys)))
-	router.Handle("/reverse/static/*", http.StripPrefix("/reverse", hashfs.FileServer(reverseWeb.StaticSys)))
-	router.Handle("/sortable/static/*", http.StripPrefix("/sortable", hashfs.FileServer(sortableWeb.StaticSys)))
 
 	natsPort, err := getFreeNatsPort()
 	if err != nil {
@@ -69,11 +61,12 @@ func SetupRoutes(ctx context.Context, router chi.Router) (err error) {
 	sessionStore.MaxAge(int(24 * time.Hour / time.Second))
 
 	if err := errors.Join(
-		indexFeature.SetupRoutes(router, sessionStore, ns),
-		counterFeature.SetupRoutes(router, sessionStore),
-		monitorFeature.SetupRoutes(router),
-		sortableFeature.SetupRoutes(router),
-		reverseFeature.SetupRoutes(router),
+		common.SetupRoutes(router),
+		index.SetupRoutes(router, sessionStore, ns),
+		counter.SetupRoutes(router, sessionStore),
+		monitor.SetupRoutes(router),
+		sortable.SetupRoutes(router),
+		reverse.SetupRoutes(router),
 	); err != nil {
 		return fmt.Errorf("error setting up routes: %w", err)
 	}
