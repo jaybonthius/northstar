@@ -10,6 +10,7 @@ import (
 	"os"
 	"strconv"
 	"sync"
+	"sync/atomic"
 	"time"
 
 	"northstar/app/features/common"
@@ -27,6 +28,8 @@ import (
 	"github.com/starfederation/datastar-go/datastar"
 )
 
+var buildReloadRequested atomic.Bool
+
 func SetupRoutes(ctx context.Context, router chi.Router) (err error) {
 
 	var hotReloadOnce sync.Once
@@ -36,6 +39,28 @@ func SetupRoutes(ctx context.Context, router chi.Router) (err error) {
 			sse.ExecuteScript("window.location.reload()")
 		})
 		<-r.Context().Done()
+	})
+
+	router.Get("/build-reload", func(w http.ResponseWriter, r *http.Request) {
+		sse := datastar.NewSSE(w, r)
+
+		for {
+			if buildReloadRequested.CompareAndSwap(true, false) {
+				sse.ExecuteScript("window.location.reload()")
+				return
+			}
+			select {
+			case <-time.After(50 * time.Millisecond):
+			case <-r.Context().Done():
+				return
+			}
+		}
+	})
+
+	router.Get("/force-reload", func(w http.ResponseWriter, r *http.Request) {
+		buildReloadRequested.Store(true)
+		w.WriteHeader(http.StatusOK)
+		w.Write([]byte("OK"))
 	})
 
 	natsPort, err := getFreeNatsPort()

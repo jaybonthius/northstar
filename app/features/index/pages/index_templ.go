@@ -12,7 +12,7 @@ import (
 	"github.com/starfederation/datastar-go/datastar"
 	"northstar/app/features/common/components"
 	"northstar/app/features/common/layouts"
-	web "northstar/app/features/index/web"
+	"northstar/app/static"
 )
 
 func IndexPage(title string) templ.Component {
@@ -75,7 +75,7 @@ func IndexPage(title string) templ.Component {
 			}
 			return nil
 		})
-		templ_7745c5c3_Err = layouts.Base(title, web.StaticPath("styles/index.css")).Render(templ.WithChildren(ctx, templ_7745c5c3_Var2), templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = layouts.Base(title, static.StaticPath("index", "styles/index.css")).Render(templ.WithChildren(ctx, templ_7745c5c3_Var2), templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

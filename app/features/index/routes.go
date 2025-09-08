@@ -1,11 +1,10 @@
 package index
 
 import (
-	"net/http"
 	"northstar/app/features/index/services"
 	"northstar/app/features/index/web"
+	"northstar/app/static"
 
-	"github.com/benbjohnson/hashfs"
 	"github.com/delaneyj/toolbelt/embeddednats"
 	"github.com/go-chi/chi/v5"
 	"github.com/gorilla/sessions"
@@ -19,7 +18,7 @@ func SetupRoutes(router chi.Router, store sessions.Store, ns *embeddednats.Serve
 
 	handlers := NewHandlers(todoService)
 
-	router.Handle("/index/static/*", http.StripPrefix("/index", hashfs.FileServer(web.StaticSys)))
+	router.Handle("/index/static/*", static.Handler("/index/static", web.StaticDirectory, "index"))
 	router.Get("/", handlers.IndexPage)
 
 	router.Route("/api", func(apiRouter chi.Router) {

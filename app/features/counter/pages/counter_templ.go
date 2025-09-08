@@ -12,7 +12,7 @@ import (
 	"github.com/starfederation/datastar-go/datastar"
 	"northstar/app/features/common/components"
 	"northstar/app/features/common/layouts"
-	web "northstar/app/features/counter/web"
+	"northstar/app/static"
 )
 
 type CounterSignals struct {
@@ -218,7 +218,7 @@ func CounterPage() templ.Component {
 			}
 			return nil
 		})
-		templ_7745c5c3_Err = layouts.Base("Counter", web.StaticPath("styles/counter.css")).Render(templ.WithChildren(ctx, templ_7745c5c3_Var8), templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = layouts.Base("Counter", static.StaticPath("counter", "styles/counter.css")).Render(templ.WithChildren(ctx, templ_7745c5c3_Var8), templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

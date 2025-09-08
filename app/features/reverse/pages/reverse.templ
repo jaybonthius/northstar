@@ -3,11 +3,11 @@ package pages
 import (
 	"northstar/app/features/common/components"
 	"northstar/app/features/common/layouts"
-	"northstar/app/features/reverse/web"
+	"northstar/app/static"
 )
 
 templ ReversePage() {
-	@layouts.Base("Reverse Web Component", web.StaticPath("styles/reverse.css")) {
+	@layouts.Base("Reverse Web Component", static.StaticPath("reverse", "styles/reverse.css")) {
 		<main class="container">
 			@components.Navigation(components.PageReverse)
 			<article>
@@ -23,6 +23,6 @@ templ ReversePage() {
 				</div>
 			</article>
 		</main>
-		<script type="module" src={ web.StaticPath("web-components/reverse-component.js") }></script>
+		<script type="module" src={ static.StaticPath("reverse", "web-components/reverse-component.js") }></script>
 	}
 }

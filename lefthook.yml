@@ -2,7 +2,7 @@
 # https://github.com/evilmartians/lefthook/pull/1095
 pre-commit:
   commands:
-    fmt:
-      run: task fmt
     build:
       run: task build
+    fmt:
+      run: task fmt
