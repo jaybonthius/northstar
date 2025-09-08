@@ -8,7 +8,9 @@ import (
 	"net/http"
 	app "northstar/app"
 	"northstar/config"
+	"northstar/db"
 	"northstar/logger"
+	"northstar/nats"
 	"os"
 	"os/signal"
 	"syscall"
@@ -35,6 +37,23 @@ func main() {
 func run(ctx context.Context) error {
 	slog.Info("Configuration loaded", "host", config.Global.Host, "port", config.Global.Port, "log_level", config.Global.LogLevel, "environment", config.Global.Environment)
 
+	// Initialize Database
+	database, err := db.InitDatabase()
+	if err != nil {
+		return fmt.Errorf("failed to initialize database: %w", err)
+	}
+	defer func() {
+		if err := database.Close(); err != nil {
+			slog.Error("error closing database", slog.Any("error", err))
+		}
+	}()
+
+	// Initialize NATS
+	ns, err := nats.SetupNATS(ctx)
+	if err != nil {
+		return fmt.Errorf("error setting up NATS: %w", err)
+	}
+
 	addr := fmt.Sprintf("%s:%s", config.Global.Host, config.Global.Port)
 	slog.Info("server started", "host", config.Global.Host, "port", config.Global.Port)
 	defer slog.Info("server shutdown complete")
@@ -47,7 +66,7 @@ func run(ctx context.Context) error {
 		middleware.Recoverer,
 	)
 
-	if err := app.SetupRoutes(egctx, router); err != nil {
+	if err := app.SetupRoutes(egctx, router, ns); err != nil {
 		return fmt.Errorf("error setting up routes: %w", err)
 	}
 
