@@ -7,6 +7,7 @@ import (
 	"net"
 	"net/http"
 	app "northstar/app"
+	"northstar/config"
 	"os"
 	"os/signal"
 	"syscall"
@@ -14,12 +15,10 @@ import (
 
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
-	"github.com/joho/godotenv"
 	"golang.org/x/sync/errgroup"
 )
 
 func main() {
-	godotenv.Load()
 
 	ctx, cancel := signal.NotifyContext(context.Background(), syscall.SIGINT, syscall.SIGTERM)
 	defer cancel()
@@ -49,18 +48,10 @@ func main() {
 }
 
 func run(ctx context.Context) error {
-	getEnv := func(key, fallback string) string {
-		if val, ok := os.LookupEnv(key); ok {
-			return val
-		}
-		return fallback
-	}
+	cfg := config.Load()
 
-	host := getEnv("HOST", "0.0.0.0")
-	port := getEnv("PORT", "8080")
-
-	addr := fmt.Sprintf("%s:%s", host, port)
-	slog.Info("server started", "host", host, "port", port)
+	addr := fmt.Sprintf("%s:%s", cfg.Host, cfg.Port)
+	slog.Info("server started", "host", cfg.Host, "port", cfg.Port)
 	defer slog.Info("server shutdown complete")
 
 	eg, egctx := errgroup.WithContext(ctx)
