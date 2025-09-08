@@ -82,6 +82,7 @@ tasks:
   fmt:go:
     cmds:
       - go fmt ./...
+      - go mod tidy
     sources:
       - "**/*.go"
       - exclude: "**/*_templ.go"

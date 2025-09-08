@@ -4,7 +4,7 @@ go 1.25
 
 require (
 	github.com/go-chi/chi/v5 v5.2.3
-	golang.org/x/sync v0.16.0
+	golang.org/x/sync v0.17.0
 )
 
 require (
@@ -20,9 +20,11 @@ require (
 	github.com/mattn/go-isatty v0.0.20
 	github.com/nats-io/nats-server/v2 v2.11.8
 	github.com/nats-io/nats.go v1.45.0
+	github.com/pressly/goose/v3 v3.25.0
 	github.com/samber/lo v1.51.0
 	github.com/shirou/gopsutil/v4 v4.25.8
 	github.com/starfederation/datastar-go v1.0.2
+	modernc.org/sqlite v1.38.2
 )
 
 require (
@@ -114,6 +116,7 @@ require (
 	github.com/mattn/go-runewidth v0.0.16 // indirect
 	github.com/mattn/go-tty v0.0.7 // indirect
 	github.com/mattn/go-zglob v0.0.6 // indirect
+	github.com/mfridman/interpolate v0.0.2 // indirect
 	github.com/minio/highwayhash v1.0.3 // indirect
 	github.com/mitchellh/colorstring v0.0.0-20190213212951-d06e56a500db // indirect
 	github.com/mitchellh/copystructure v1.2.0 // indirect
@@ -138,6 +141,7 @@ require (
 	github.com/sajari/fuzzy v1.0.0 // indirect
 	github.com/schollz/progressbar/v3 v3.18.0 // indirect
 	github.com/sergi/go-diff v1.3.2-0.20230802210424-5b0b94c5c0d3 // indirect
+	github.com/sethvargo/go-retry v0.3.0 // indirect
 	github.com/skeema/knownhosts v1.3.1 // indirect
 	github.com/spf13/afero v1.14.0 // indirect
 	github.com/spf13/cast v1.7.0 // indirect
@@ -152,6 +156,7 @@ require (
 	github.com/yusufpapurcu/wmi v1.2.4 // indirect
 	github.com/zeebo/xxh3 v1.0.2 // indirect
 	go.starlark.net v0.0.0-20231101134539-556fd59b42f6 // indirect
+	go.uber.org/multierr v1.11.0 // indirect
 	go.yaml.in/yaml/v3 v3.0.3 // indirect
 	golang.org/x/arch v0.11.0 // indirect
 	golang.org/x/crypto v0.41.0 // indirect
@@ -170,7 +175,6 @@ require (
 	modernc.org/libc v1.66.8 // indirect
 	modernc.org/mathutil v1.7.1 // indirect
 	modernc.org/memory v1.11.0 // indirect
-	modernc.org/sqlite v1.38.2 // indirect
 	mvdan.cc/sh/v3 v3.11.0 // indirect
 	zombiezen.com/go/sqlite v1.4.2 // indirect
 )

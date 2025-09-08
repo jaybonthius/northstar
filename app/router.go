@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"net/http"
 	"northstar/config"
-	"northstar/nats"
 	"sync"
 	"time"
 
@@ -17,12 +16,13 @@ import (
 	"northstar/app/features/reverse"
 	"northstar/app/features/sortable"
 
+	"github.com/delaneyj/toolbelt/embeddednats"
 	"github.com/go-chi/chi/v5"
 	"github.com/gorilla/sessions"
 	"github.com/starfederation/datastar-go/datastar"
 )
 
-func SetupRoutes(ctx context.Context, router chi.Router) (err error) {
+func SetupRoutes(ctx context.Context, router chi.Router, ns *embeddednats.Server) (err error) {
 	reloadChan := make(chan struct{}, 1)
 	var hotReloadOnce sync.Once
 	router.Get("/reload", func(w http.ResponseWriter, r *http.Request) {
@@ -45,11 +45,6 @@ func SetupRoutes(ctx context.Context, router chi.Router) (err error) {
 			w.WriteHeader(http.StatusOK)
 			w.Write([]byte("OK"))
 		})
-	}
-
-	ns, err := nats.SetupNATS(ctx)
-	if err != nil {
-		return fmt.Errorf("error setting up NATS: %w", err)
 	}
 
 	sessionStore := sessions.NewCookieStore([]byte("session-secret"))
