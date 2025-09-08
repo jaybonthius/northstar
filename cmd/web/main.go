@@ -19,13 +19,12 @@ import (
 )
 
 func main() {
-
 	ctx, cancel := signal.NotifyContext(context.Background(), syscall.SIGINT, syscall.SIGTERM)
 	defer cancel()
 
 	logger := slog.New(slog.NewJSONHandler(os.Stdout, &slog.HandlerOptions{
 		Level: func() slog.Level {
-			switch os.Getenv("LOG_LEVEL") {
+			switch config.Global.LogLevel {
 			case "DEBUG":
 				return slog.LevelDebug
 			case "INFO":
@@ -48,10 +47,8 @@ func main() {
 }
 
 func run(ctx context.Context) error {
-	cfg := config.Load()
-
-	addr := fmt.Sprintf("%s:%s", cfg.Host, cfg.Port)
-	slog.Info("server started", "host", cfg.Host, "port", cfg.Port)
+	addr := fmt.Sprintf("%s:%s", config.Global.Host, config.Global.Port)
+	slog.Info("server started", "host", config.Global.Host, "port", config.Global.Port)
 	defer slog.Info("server shutdown complete")
 
 	eg, egctx := errgroup.WithContext(ctx)

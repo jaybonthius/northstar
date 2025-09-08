@@ -98,8 +98,7 @@ func run(watch bool) error {
 					slog.Info("build complete", "errors", len(result.Errors), "warnings", len(result.Warnings))
 					if watch && len(result.Errors) == 0 {
 						slog.Info("triggering reload!")
-						cfg := config.Load()
-						http.Get(fmt.Sprintf("http://%s:%s/force-reload", cfg.Host, cfg.Port))
+						http.Get(fmt.Sprintf("http://%s:%s/force-reload", config.Global.Host, config.Global.Port))
 					}
 					return api.OnEndResult{}, nil
 				})
