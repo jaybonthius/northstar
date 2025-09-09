@@ -7,7 +7,7 @@ import (
 )
 
 templ SortablePage() {
-	@layouts.Base("Sortable", static.StaticPath("sortable", "styles/sortable.css")) {
+	@layouts.Base("Sortable", []string{static.StaticPath("sortable", "styles/sortable.css")}, []string{static.StaticPath("sortable", "web-components/sortable-example.js")}) {
 		<main class="container">
 			@components.Navigation(components.PageSortable)
 			<article>
@@ -29,7 +29,6 @@ templ SortablePage() {
 					data-attr-items="JSON.stringify($items)"
 					data-on-change="event.detail && console.log(`Send this data somewhere else! ${event.detail}`)"
 				></sortable-example>
-				<script type="module" src={ static.StaticPath("sortable", "web-components/sortable-example.js") }></script>
 			</article>
 		</main>
 	}

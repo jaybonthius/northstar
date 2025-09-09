@@ -63,26 +63,13 @@ func SortablePage() templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "<div class=\"alert-content\"><span>This example uses <a class=\"alert-link\" href=\"https://lit.dev/\">lit</a> and <a class=\"alert-link\" href=\"https://github.com/SortableJS/Sortable\">SortableJS</a>, <strong>you will need to download both libraries before this example will work!</strong></span> <span><small>Check out this <a class=\"alert-link\" href=\"app/features/sortable/web-components/README.md\">README</a> to learn more</small></span></div></div><sortable-example class=\"sortable-example\" data-signals=\"{title: 'Item Info', info:'', items: [{name: `item one`}, {name: `item two`}, {name: `item three`}, {name: `item four`}, {name: `item five`}]}\" data-attr-title=\"$title\" data-attr-value=\"$info\" data-attr-items=\"JSON.stringify($items)\" data-on-change=\"event.detail && console.log(`Send this data somewhere else! ${event.detail}`)\"></sortable-example><script type=\"module\" src=\"")
-			if templ_7745c5c3_Err != nil {
-				return templ_7745c5c3_Err
-			}
-			var templ_7745c5c3_Var3 string
-			templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(static.StaticPath("sortable", "web-components/sortable-example.js"))
-			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `app/features/sortable/pages/sortable.templ`, Line: 32, Col: 99}
-			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
-			if templ_7745c5c3_Err != nil {
-				return templ_7745c5c3_Err
-			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "\"></script></article></main>")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "<div class=\"alert-content\"><span>This example uses <a class=\"alert-link\" href=\"https://lit.dev/\">lit</a> and <a class=\"alert-link\" href=\"https://github.com/SortableJS/Sortable\">SortableJS</a>, <strong>you will need to download both libraries before this example will work!</strong></span> <span><small>Check out this <a class=\"alert-link\" href=\"app/features/sortable/web-components/README.md\">README</a> to learn more</small></span></div></div><sortable-example class=\"sortable-example\" data-signals=\"{title: 'Item Info', info:'', items: [{name: `item one`}, {name: `item two`}, {name: `item three`}, {name: `item four`}, {name: `item five`}]}\" data-attr-title=\"$title\" data-attr-value=\"$info\" data-attr-items=\"JSON.stringify($items)\" data-on-change=\"event.detail && console.log(`Send this data somewhere else! ${event.detail}`)\"></sortable-example></article></main>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
 			return nil
 		})
-		templ_7745c5c3_Err = layouts.Base("Sortable", static.StaticPath("sortable", "styles/sortable.css")).Render(templ.WithChildren(ctx, templ_7745c5c3_Var2), templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = layouts.Base("Sortable", []string{static.StaticPath("sortable", "styles/sortable.css")}, []string{static.StaticPath("sortable", "web-components/sortable-example.js")}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var2), templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

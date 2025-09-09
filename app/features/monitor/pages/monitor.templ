@@ -16,7 +16,7 @@ type SystemMonitorSignals struct {
 }
 
 templ MonitorPage() {
-	@layouts.Base("System Monitoring") {
+	@layouts.Base("System Monitoring", nil, nil) {
 		<main class="container">
 			@components.Navigation(components.PageMonitor)
 			<article>

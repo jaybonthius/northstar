@@ -53,7 +53,7 @@ templ Counter(signals CounterSignals) {
 }
 
 templ CounterPage() {
-	@layouts.Base("Counter", static.StaticPath("counter", "styles/counter.css")) {
+	@layouts.Base("Counter", []string{static.StaticPath("counter", "styles/counter.css")}, nil) {
 		<main class="container">
 			@components.Navigation(components.PageCounter)
 			<article>

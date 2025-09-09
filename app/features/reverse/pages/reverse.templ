@@ -7,7 +7,7 @@ import (
 )
 
 templ ReversePage() {
-	@layouts.Base("Reverse Web Component", static.StaticPath("reverse", "styles/reverse.css")) {
+	@layouts.Base("Reverse Web Component", []string{static.StaticPath("reverse", "styles/reverse.css")}, []string{static.StaticPath("reverse", "web-components/reverse-component.js")}) {
 		<main class="container">
 			@components.Navigation(components.PageReverse)
 			<article>
@@ -26,6 +26,5 @@ templ ReversePage() {
 				</div>
 			</article>
 		</main>
-		<script type="module" src={ static.StaticPath("reverse", "web-components/reverse-component.js") }></script>
 	}
 }

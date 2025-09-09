@@ -3,7 +3,7 @@ package pages
 import "northstar/app/features/common/layouts"
 
 templ AuthFormBase(title string) {
-	@layouts.Base(title) {
+	@layouts.Base(title, nil, nil) {
 		<main class="container">
 			<article>
 				{ children... }

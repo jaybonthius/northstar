@@ -12,7 +12,7 @@ type ProfilePageData struct {
 }
 
 templ ProfilePage(user *authdb.User) {
-	@layouts.Base("Profile", static.StaticPath("auth", "styles/profile.css")) {
+	@layouts.Base("Profile", []string{static.StaticPath("auth", "styles/profile.css")}, nil) {
 		<main class="container">
 			@components.Navigation(components.PageProfile)
 			<article>

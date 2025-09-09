@@ -3,22 +3,24 @@ package layouts
 import "northstar/app/static"
 import "northstar/config"
 
-templ Base(title string, stylesheets ...string) {
+templ Base(title string, stylesheets []string, webcomponents []string) {
 	<!DOCTYPE html>
 	<html lang="en">
 		<head>
 			<title>{ title }</title>
 			<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
-			<link rel="preconnect" href="https://fonts.googleapis.com"/>
-			<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-			<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&family=Inter:wght@100..900&family=Gideon+Roman:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet"/>
-			<script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+			// ------------------ css ------------------
 			<link rel="icon" type="image/x-icon" href={ static.StaticPath("common", "assets/favicon.ico") }/>
-			<script defer type="module" src={ static.StaticPath("common", "datastar/datastar.js") }></script>
 			<link href={ static.StaticPath("common", "styles/common.css") } rel="stylesheet" type="text/css"/>
 			for _, stylesheet := range stylesheets {
 				<link href={ stylesheet } rel="stylesheet" type="text/css"/>
 			}
+			// ------------------ js ------------------
+			for _, webcomponent := range webcomponents {
+				<script type="module" src={ webcomponent }></script>
+			}
+			<script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+			<script defer type="module" src={ static.StaticPath("common", "datastar/datastar.js") }></script>
 		</head>
 		<body>
 			if config.Global.Environment == config.Dev {
