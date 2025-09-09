@@ -58,20 +58,20 @@ func SetupRoutes(ctx context.Context, router chi.Router, db *sql.DB, sessionStor
 	// }
 
 	// setup reload routes
-	reloadChan := make(chan struct{}, 1)
-	var hotReloadOnce sync.Once
-	router.Get("/reload", func(w http.ResponseWriter, r *http.Request) {
-		sse := datastar.NewSSE(w, r)
-		reload := func() { sse.ExecuteScript("window.location.reload()") }
-		hotReloadOnce.Do(reload)
-		select {
-		case <-reloadChan:
-			reload()
-		case <-r.Context().Done():
-		}
-	})
-
 	if config.Global.Environment == config.Dev {
+		reloadChan := make(chan struct{}, 1)
+		var hotReloadOnce sync.Once
+		router.Get("/reload", func(w http.ResponseWriter, r *http.Request) {
+			sse := datastar.NewSSE(w, r)
+			reload := func() { sse.ExecuteScript("window.location.reload()") }
+			hotReloadOnce.Do(reload)
+			select {
+			case <-reloadChan:
+				reload()
+			case <-r.Context().Done():
+			}
+		})
+
 		router.Get("/force-reload", func(w http.ResponseWriter, r *http.Request) {
 			select {
 			case reloadChan <- struct{}{}:

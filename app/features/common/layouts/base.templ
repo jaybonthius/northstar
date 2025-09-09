@@ -1,6 +1,7 @@
 package layouts
 
 import "northstar/app/static"
+import "northstar/config"
 
 templ Base(title string, stylesheets ...string) {
 	<!DOCTYPE html>
@@ -20,8 +21,13 @@ templ Base(title string, stylesheets ...string) {
 			}
 		</head>
 		<body>
-			<div data-on-load="@get('/reload', {retryMaxCount: 1000, retryInterval:20, retryMaxWaitMs:200})"></div>
+			if config.Global.Environment == config.Dev {
+				<div data-on-load="@get('/reload', {retryMaxCount: 1000, retryInterval:20, retryMaxWaitMs:200})"></div>
+			}
 			{ children... }
+			if config.Global.Environment == config.Dev {
+				// TODO: add datastar inspector when i get rich
+			}
 		</body>
 	</html>
 }
