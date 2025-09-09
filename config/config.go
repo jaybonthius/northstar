@@ -15,10 +15,11 @@ const (
 )
 
 type Config struct {
-	Environment Environment
-	Host        string
-	Port        string
-	LogLevel    string
+	Environment   Environment
+	Host          string
+	Port          string
+	LogLevel      string
+	SessionSecret string
 }
 
 var (
@@ -43,8 +44,9 @@ func loadBase() *Config {
 	}
 
 	return &Config{
-		Host:     getEnv("HOST", "0.0.0.0"),
-		Port:     getEnv("PORT", "8080"),
-		LogLevel: getEnv("LOG_LEVEL", "INFO"),
+		Host:          getEnv("HOST", "0.0.0.0"),
+		Port:          getEnv("PORT", "8080"),
+		LogLevel:      getEnv("LOG_LEVEL", "INFO"),
+		SessionSecret: getEnv("SESSION_SECRET", ""),
 	}
 }

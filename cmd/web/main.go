@@ -18,6 +18,7 @@ import (
 
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
+	"github.com/gorilla/sessions"
 	"golang.org/x/sync/errgroup"
 )
 
@@ -60,13 +61,24 @@ func run(ctx context.Context) error {
 
 	eg, egctx := errgroup.WithContext(ctx)
 
+	sessionKey := config.Global.SessionSecret
+	if sessionKey == "" {
+		sessionKey = "dev-session-key-change-in-production-very-long-key"
+	}
+	store := sessions.NewCookieStore([]byte(sessionKey))
+	store.MaxAge(86400 * 30) // 30 days
+	store.Options.Path = "/"
+	store.Options.HttpOnly = true
+	store.Options.Secure = false // Set to true in production with HTTPS
+	store.Options.SameSite = http.SameSiteLaxMode
+
 	router := chi.NewMux()
 	router.Use(
 		middleware.Logger,
 		middleware.Recoverer,
 	)
 
-	if err := app.SetupRoutes(egctx, router, ns); err != nil {
+	if err := app.SetupRoutes(egctx, router, database, store, ns); err != nil {
 		return fmt.Errorf("error setting up routes: %w", err)
 	}
 

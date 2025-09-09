@@ -64,20 +64,20 @@ func MonitorPage() templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "<article><div id=\"container\" data-on-load=\"")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "<article><header><h1>System Monitoring</h1></header><div id=\"container\" data-on-load=\"")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
 			var templ_7745c5c3_Var3 string
 			templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(datastar.GetSSE("/monitor/events"))
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `app/features/monitor/pages/monitor.templ`, Line: 25, Col: 54}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `app/features/monitor/pages/monitor.templ`, Line: 28, Col: 54}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "\" data-signals=\"{memTotal:'', memUsed:'', memUsedPercent:'', cpuUser:'', cpuSystem:'', cpuIdle:''}\"><div class=\"grid\"><div id=\"mem\"><h1>Memory</h1><p>Total: <span data-text=\"$memTotal\"></span></p><p>Used: <span data-text=\"$memUsed\"></span></p><p>Used (%): <span data-text=\"$memUsedPercent\"></span></p></div><div id=\"cpu\"><h1>CPU</h1><p>User: <span data-text=\"$cpuUser\"></span></p><p>System: <span data-text=\"$cpuSystem\"></span></p><p>Idle: <span data-text=\"$cpuIdle\"></span></p></div></div></div></article></main>")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "\" data-signals=\"{memTotal:'', memUsed:'', memUsedPercent:'', cpuUser:'', cpuSystem:'', cpuIdle:''}\"><div class=\"grid\"><div id=\"mem\"><h2>Memory</h2><p>Total: <span data-text=\"$memTotal\"></span></p><p>Used: <span data-text=\"$memUsed\"></span></p><p>Used (%): <span data-text=\"$memUsedPercent\"></span></p></div><div id=\"cpu\"><h2>CPU</h2><p>User: <span data-text=\"$cpuUser\"></span></p><p>System: <span data-text=\"$cpuSystem\"></span></p><p>Idle: <span data-text=\"$cpuIdle\"></span></p></div></div></div></article></main>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

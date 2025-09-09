@@ -61,11 +61,32 @@
   --alert-border: var(--orange-11);
 }
 
-.active-nav-item {
-  background-color: var(--purple-1);
-  color: var(--purple-9);
+header h1 {
+  margin: 0;
+}
+
+.active-nav-item,
+.login-nav-item,
+.logout-nav-item {
   padding: var(--size-1) var(--size-2);
   font-weight: var(--font-weight-6);
+  border: none;
+  text-decoration: underline;
+}
+
+.active-nav-item {
+  color: var(--purple-9);
+  background-color: var(--purple-1);
+}
+
+.login-nav-item {
+  color: var(--green-9);
+  background-color: var(--green-1);
+}
+
+.logout-nav-item {
+  color: var(--red-9);
+  background-color: var(--red-3);
 }
 
 .alert {

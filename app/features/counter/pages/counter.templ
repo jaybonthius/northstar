@@ -57,6 +57,9 @@ templ CounterPage() {
 		<main class="container">
 			@components.Navigation(components.PageCounter)
 			<article>
+				<header>
+					<h1>Counter</h1>
+				</header>
 				<div id="container" data-on-load={ datastar.GetSSE("/counter/data") }></div>
 			</article>
 		</main>

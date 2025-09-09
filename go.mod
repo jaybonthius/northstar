@@ -14,6 +14,7 @@ require (
 	github.com/delaneyj/toolbelt v0.5.3
 	github.com/dustin/go-humanize v1.0.1
 	github.com/evanw/esbuild v0.25.9
+	github.com/google/uuid v1.6.0
 	github.com/gorilla/sessions v1.4.0
 	github.com/joho/godotenv v1.5.1
 	github.com/lmittmann/tint v1.1.2
@@ -24,6 +25,7 @@ require (
 	github.com/samber/lo v1.51.0
 	github.com/shirou/gopsutil/v4 v4.25.8
 	github.com/starfederation/datastar-go v1.0.2
+	golang.org/x/crypto v0.41.0
 	modernc.org/sqlite v1.38.2
 )
 
@@ -91,7 +93,6 @@ require (
 	github.com/golang/groupcache v0.0.0-20241129210726-2c02b8208cf8 // indirect
 	github.com/google/go-dap v0.12.0 // indirect
 	github.com/google/go-tpm v0.9.5 // indirect
-	github.com/google/uuid v1.6.0 // indirect
 	github.com/gorilla/securecookie v1.1.2 // indirect
 	github.com/gotnospirit/makeplural v0.0.0-20180622080156-a5f48d94d976 // indirect
 	github.com/gotnospirit/messageformat v0.0.0-20221001023931-dfe49f1eb092 // indirect
@@ -159,7 +160,6 @@ require (
 	go.uber.org/multierr v1.11.0 // indirect
 	go.yaml.in/yaml/v3 v3.0.3 // indirect
 	golang.org/x/arch v0.11.0 // indirect
-	golang.org/x/crypto v0.41.0 // indirect
 	golang.org/x/exp v0.0.0-20250819193227-8b4c13bb791b // indirect
 	golang.org/x/mod v0.27.0 // indirect
 	golang.org/x/net v0.43.0 // indirect

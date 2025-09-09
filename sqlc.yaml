@@ -1,0 +1,9 @@
+version: "2"
+sql:
+  - schema: "db/migrations"
+    queries: "app/features/auth/queries"
+    engine: "sqlite"
+    gen:
+      go:
+        out: "app/features/auth/gen/authdb"
+        package: "authdb"

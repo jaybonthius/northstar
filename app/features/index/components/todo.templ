@@ -49,40 +49,37 @@ templ TodosMVCView(mvc *TodoMVC) {
 			data-signals={ fmt.Sprintf("{input:'%s'}", input) }
 		>
 			<section>
-				<header>
-					<div class="alert">
-						@common.Icon("material-symbols:info")
-						<div class="alert-content">
-							<span><strong>This mini application is driven by a single get request!</strong></span>
-							<span><small>As you interact with the UI, the backend state is updated and new partial HTML fragments are sent down to the client via Server-Sent Events. You can make simple apps or full blown SPA replacements with this pattern. Open your dev tools and watch the network tab to see the magic happen (you will want to look for the "/todos" Network/EventStream tab).</small></span>
-						</div>
+				<div class="alert">
+					@common.Icon("material-symbols:info")
+					<div class="alert-content">
+						<span><strong>This mini application is driven by a single get request!</strong></span>
+						<span><small>As you interact with the UI, the backend state is updated and new partial HTML fragments are sent down to the client via Server-Sent Events. You can make simple apps or full blown SPA replacements with this pattern. Open your dev tools and watch the network tab to see the magic happen (you will want to look for the "/todos" Network/EventStream tab).</small></span>
 					</div>
-					<h1>TODO</h1>
-					<p>
-						The input is bound to a local store, but this is not a single page application.  
-						It is like having <a href="https://htmx.org" target="_blank">HTMX</a> + 
-						<a href="https://alpinejs.dev/" target="_blank">Alpine.js</a>
-						but with just one API to learn and much easier to extend.
-					</p>
-					<div class="todo-controls">
-						if hasTodos {
-							<button
-								id="toggleAll"
-								class="todo-toggle-all"
-								data-tip="toggle all todos"
-								data-on-click={ datastar.PostSSE("/api/todos/-1/toggle") }
-								data-indicator="toggleAllFetching"
-								data-attrs-disabled="$toggleAllFetching"
-							>
-								@common.Icon("material-symbols:checklist")
-							</button>
-						}
-						if mvc.EditingIdx <0 {
-							@TodoInput(-1)
-						}
-						@common.SseIndicator("toggleAllFetching")
-					</div>
-				</header>
+				</div>
+				<p>
+					The input is bound to a local store, but this is not a single page application.  
+					It is like having <a href="https://htmx.org" target="_blank">HTMX</a> + 
+					<a href="https://alpinejs.dev/" target="_blank">Alpine.js</a>
+					but with just one API to learn and much easier to extend.
+				</p>
+				<div class="todo-controls">
+					if hasTodos {
+						<button
+							id="toggleAll"
+							class="todo-toggle-all"
+							data-tip="toggle all todos"
+							data-on-click={ datastar.PostSSE("/api/todos/-1/toggle") }
+							data-indicator="toggleAllFetching"
+							data-attrs-disabled="$toggleAllFetching"
+						>
+							@common.Icon("material-symbols:checklist")
+						</button>
+					}
+					if mvc.EditingIdx <0 {
+						@TodoInput(-1)
+					}
+					@common.SseIndicator("toggleAllFetching")
+				</div>
 				if hasTodos {
 					<section>
 						<ul>
