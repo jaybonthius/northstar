@@ -8,7 +8,7 @@ package components
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
-import "northstar/app/features/auth"
+import "northstar/app/middleware"
 
 type page int
 
@@ -319,7 +319,7 @@ func Navigation(page page) templ.Component {
 			templ_7745c5c3_Var23 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		if auth.GetUserIDFromContext(ctx) != "" {
+		if middleware.GetUserIDFromContext(ctx) != "" {
 			templ_7745c5c3_Err = AuthenticatedNavigation(page).Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err

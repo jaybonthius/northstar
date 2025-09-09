@@ -4,6 +4,7 @@ import (
 	"database/sql"
 
 	"northstar/app/features/auth/gen/authdb"
+	"northstar/app/middleware"
 
 	"github.com/go-chi/chi/v5"
 	"github.com/gorilla/sessions"
@@ -18,19 +19,19 @@ func SetupRoutes(router chi.Router, db *sql.DB, store sessions.Store) error {
 	}
 
 	router.Route("/login", func(r chi.Router) {
-		r.Use(RedirectIfAuthenticated(store))
+		r.Use(middleware.RedirectIfAuthenticated(store))
 		r.Get("/", authHandlers.handleLoginPage)
 		r.Post("/", authHandlers.handleLogin)
 	})
 
 	router.Route("/signup", func(r chi.Router) {
-		r.Use(RedirectIfAuthenticated(store))
+		r.Use(middleware.RedirectIfAuthenticated(store))
 		r.Get("/", authHandlers.handleSignupPage)
 		r.Post("/", authHandlers.handleSignup)
 	})
 
 	router.Route("/logout", func(r chi.Router) {
-		r.Use(RequireAuth(store, db))
+		r.Use(middleware.RequireAuth(store, db))
 		r.Post("/", authHandlers.handleLogout)
 	})
 

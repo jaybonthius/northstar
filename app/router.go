@@ -9,6 +9,8 @@ import (
 	"northstar/config"
 	"sync"
 
+	"northstar/app/middleware"
+
 	"northstar/app/features/auth"
 	"northstar/app/features/common"
 	"northstar/app/features/counter"
@@ -25,7 +27,7 @@ import (
 
 func SetupRoutes(ctx context.Context, router chi.Router, db *sql.DB, sessionStore *sessions.CookieStore, ns *embeddednats.Server) (err error) {
 	// apply optional auth middleware to all routes
-	router.Use(auth.WithAuth(sessionStore, db))
+	router.Use(middleware.WithAuth(sessionStore, db))
 
 	// setup auth routes
 	if err := auth.SetupRoutes(router, db, sessionStore); err != nil {

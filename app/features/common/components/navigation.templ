@@ -1,6 +1,6 @@
 package components
 
-import "northstar/app/features/auth"
+import "northstar/app/middleware"
 
 type page int
 
@@ -55,7 +55,7 @@ templ UnauthenticatedNavigation(page page) {
 }
 
 templ Navigation(page page) {
-	if auth.GetUserIDFromContext(ctx) != "" {
+	if middleware.GetUserIDFromContext(ctx) != "" {
 		@AuthenticatedNavigation(page)
 	} else {
 		@UnauthenticatedNavigation(page)
