@@ -61,9 +61,6 @@ func run(ctx context.Context) error {
 
 	eg, egctx := errgroup.WithContext(ctx)
 
-	sessionStore := sessions.NewCookieStore([]byte("session-secret"))
-	sessionStore.MaxAge(int(24 * time.Hour / time.Second))
-
 	sessionKey := config.Global.SessionSecret
 	if sessionKey == "" {
 		sessionKey = "dev-session-key-change-in-production-very-long-key"
@@ -81,7 +78,7 @@ func run(ctx context.Context) error {
 		middleware.Recoverer,
 	)
 
-	if err := app.SetupRoutes(egctx, router, database, sessionStore, ns); err != nil {
+	if err := app.SetupRoutes(egctx, router, database, store, ns); err != nil {
 		return fmt.Errorf("error setting up routes: %w", err)
 	}
 

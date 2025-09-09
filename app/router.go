@@ -25,7 +25,7 @@ import (
 	"github.com/starfederation/datastar-go/datastar"
 )
 
-func SetupRoutes(ctx context.Context, router chi.Router, db *sql.DB, sessionStore *sessions.CookieStore, ns *embeddednats.Server) (err error) {
+func SetupRoutes(ctx context.Context, router chi.Router, db *sql.DB, sessionStore sessions.Store, ns *embeddednats.Server) (err error) {
 	// apply optional auth middleware to all routes
 	router.Use(middleware.WithAuth(sessionStore, db))
 
