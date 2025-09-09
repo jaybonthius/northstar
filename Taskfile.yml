@@ -4,6 +4,11 @@ env:
   NATS_PORT: 4222
 
 tasks:
+  deps:
+    cmds:
+      - go mod tidy
+      - which sqlc || go install github.com/sqlc-dev/sqlc/cmd/sqlc@latest
+
   # The `build:` tasks below are used together for production builds of a project
   build:templ:
     cmds:
