@@ -36,6 +36,10 @@ tasks:
       - build:templ
       - build:web
 
+  build:sqlc:
+    cmds:
+      - sqlc generate
+
   # Use this task to debug with the delve debugger
   debug:
     cmds:

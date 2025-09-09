@@ -1,0 +1,123 @@
+package pages
+
+import "northstar/app/features/common/layouts"
+
+templ AuthFormBase(title string) {
+	@layouts.Base(title) {
+		<main class="container">
+			<article>
+				{ children... }
+			</article>
+		</main>
+	}
+}
+
+templ GenericAuthError(message string) {
+	<div id="auth-error">
+		{ message }
+	</div>
+}
+
+templ UsernameError(usernameErrors string) {
+	<small id="username-error">
+		{ usernameErrors }
+	</small>
+}
+
+templ EmailError(emailErrors string) {
+	<small id="email-error">
+		{ emailErrors }
+	</small>
+}
+
+templ PasswordError(passwordErrors string) {
+	<small id="password-error">
+		{ passwordErrors }
+	</small>
+}
+
+templ LoginPage() {
+	@AuthFormBase("Login") {
+		<header>
+			<h2>Sign in to your account</h2>
+		</header>
+		<div id="auth-error"></div>
+		<form data-on-submit="@post('/login', {contentType: 'form'})">
+			<label>
+				Email address
+				<input
+					type="email"
+					name="email"
+					required
+					placeholder="Email address"
+				/>
+				<div id="email-error"></div>
+			</label>
+			<label>
+				Password
+				<input
+					type="password"
+					name="password"
+					required
+					placeholder="Password"
+				/>
+				<div id="password-error"></div>
+			</label>
+			<button type="submit">Sign in</button>
+		</form>
+		<footer>
+			<small>
+				Don't have an account?
+				<a href="/signup">Sign up</a>
+			</small>
+		</footer>
+	}
+}
+
+templ SignupPage() {
+	@AuthFormBase("Sign Up") {
+		<header>
+			<h2>Create your account</h2>
+		</header>
+		<div id="auth-error"></div>
+		<form data-on-submit="@post('/signup', {contentType: 'form'})">
+			<label>
+				Username
+				<input
+					type="text"
+					name="username"
+					required
+					placeholder="Username"
+				/>
+				<div id="username-error"></div>
+			</label>
+			<label>
+				Email
+				<input
+					type="email"
+					name="email"
+					required
+					placeholder="Email address"
+				/>
+				<div id="email-error"></div>
+			</label>
+			<label>
+				Password
+				<input
+					type="password"
+					name="password"
+					required
+					placeholder="Password"
+				/>
+				<div id="password-error"></div>
+			</label>
+			<button type="submit">Sign up</button>
+		</form>
+		<footer>
+			<small>
+				Already have an account?
+				<a href="/login">Sign in</a>
+			</small>
+		</footer>
+	}
+}

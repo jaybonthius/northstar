@@ -2,13 +2,14 @@ package app
 
 import (
 	"context"
+	"database/sql"
 	"errors"
 	"fmt"
 	"net/http"
 	"northstar/config"
 	"sync"
-	"time"
 
+	"northstar/app/features/auth"
 	"northstar/app/features/common"
 	"northstar/app/features/counter"
 	"northstar/app/features/index"
@@ -22,7 +23,39 @@ import (
 	"github.com/starfederation/datastar-go/datastar"
 )
 
-func SetupRoutes(ctx context.Context, router chi.Router, ns *embeddednats.Server) (err error) {
+func SetupRoutes(ctx context.Context, router chi.Router, db *sql.DB, sessionStore *sessions.CookieStore, ns *embeddednats.Server) (err error) {
+	// apply optional auth middleware to all routes
+	router.Use(auth.WithAuth(sessionStore, db))
+
+	// setup auth routes
+	if err := auth.SetupRoutes(router, db, sessionStore); err != nil {
+		return fmt.Errorf("error setting up auth routes: %w", err)
+	}
+
+	// setup unprotected routes
+	if err := errors.Join(
+		common.SetupRoutes(router),
+		index.SetupRoutes(router, sessionStore, ns),
+		counter.SetupRoutes(router, sessionStore),
+		monitor.SetupRoutes(router),
+		sortable.SetupRoutes(router),
+		reverse.SetupRoutes(router),
+	); err != nil {
+		return fmt.Errorf("error setting up unprotected routes: %w", err)
+	}
+
+	// TODO make some of the routes protected
+	// // setup protected routes with auth middleware
+	// var protectedRouteErr error
+	// router.Group(func(r chi.Router) {
+	// 	r.Use(auth.RequireAuth(sessionStore, db))
+	// 	protectedRouteErr = errors.Join()
+	// })
+	// if protectedRouteErr != nil {
+	// 	return fmt.Errorf("error setting up protected routes: %w", protectedRouteErr)
+	// }
+
+	// setup reload routes
 	reloadChan := make(chan struct{}, 1)
 	var hotReloadOnce sync.Once
 	router.Get("/reload", func(w http.ResponseWriter, r *http.Request) {
@@ -45,20 +78,6 @@ func SetupRoutes(ctx context.Context, router chi.Router, ns *embeddednats.Server
 			w.WriteHeader(http.StatusOK)
 			w.Write([]byte("OK"))
 		})
-	}
-
-	sessionStore := sessions.NewCookieStore([]byte("session-secret"))
-	sessionStore.MaxAge(int(24 * time.Hour / time.Second))
-
-	if err := errors.Join(
-		common.SetupRoutes(router),
-		index.SetupRoutes(router, sessionStore, ns),
-		counter.SetupRoutes(router, sessionStore),
-		monitor.SetupRoutes(router),
-		sortable.SetupRoutes(router),
-		reverse.SetupRoutes(router),
-	); err != nil {
-		return fmt.Errorf("error setting up routes: %w", err)
 	}
 
 	return nil

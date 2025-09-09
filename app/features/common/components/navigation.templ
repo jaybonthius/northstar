@@ -1,5 +1,7 @@
 package components
 
+import "northstar/app/features/auth"
+
 type page int
 
 const (
@@ -10,7 +12,7 @@ const (
 	PageSortable
 )
 
-templ Navigation(page page) {
+templ AuthenticatedNavigation(page page) {
 	<nav>
 		<ul>
 			<li><strong>Northstar</strong></li>
@@ -21,6 +23,41 @@ templ Navigation(page page) {
 			<li><a href="/monitor" class={ templ.KV("active-nav-item", page == PageMonitor) }>System Monitoring</a></li>
 			<li><a href="/reverse" class={ templ.KV("active-nav-item", page == PageReverse) }>Reverse</a></li>
 			<li><a href="/sortable" class={ templ.KV("active-nav-item", page == PageSortable) }>Sortable</a></li>
+			<li>
+				<details class="dropdown">
+					<summary>
+						Account
+					</summary>
+					<ul dir="rtl">
+						<li><a href="#">Profile</a></li>
+						<li><button data-on-click="@post('/logout')" class="logout-nav-item">Logout</button></li>
+					</ul>
+				</details>
+			</li>
 		</ul>
 	</nav>
+}
+
+templ UnauthenticatedNavigation(page page) {
+	<nav>
+		<ul>
+			<li><strong>Northstar</strong></li>
+		</ul>
+		<ul>
+			<li><a href="/" class={ templ.KV("active-nav-item", page == PageIndex) }>TODO</a></li>
+			<li><a href="/counter" class={ templ.KV("active-nav-item", page == PageCounter) }>Counter</a></li>
+			<li><a href="/monitor" class={ templ.KV("active-nav-item", page == PageMonitor) }>System Monitoring</a></li>
+			<li><a href="/reverse" class={ templ.KV("active-nav-item", page == PageReverse) }>Reverse</a></li>
+			<li><a href="/sortable" class={ templ.KV("active-nav-item", page == PageSortable) }>Sortable</a></li>
+			<li><a href="/login" class="login-nav-item">Login</a></li>
+		</ul>
+	</nav>
+}
+
+templ Navigation(page page) {
+	if auth.GetUserIDFromContext(ctx) != "" {
+		@AuthenticatedNavigation(page)
+	} else {
+		@UnauthenticatedNavigation(page)
+	}
 }
