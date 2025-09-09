@@ -9,6 +9,7 @@ import (
 	"northstar/app/features/auth/gen/authdb"
 	"northstar/app/features/auth/pages"
 	"northstar/app/features/common/utils"
+	"northstar/app/middleware"
 
 	"github.com/google/uuid"
 	"github.com/gorilla/sessions"
@@ -293,4 +294,26 @@ func (h *authHandlers) validateSignup(ctx context.Context, username, email, pass
 	}
 
 	return validationErr, nil
+}
+
+func (h *authHandlers) handleProfilePage(w http.ResponseWriter, r *http.Request) {
+	userId := middleware.GetUserIDFromContext(r.Context())
+	if userId == "" {
+		slog.Error("No user in context")
+		http.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
+		return
+	}
+
+	user, err := h.repository.queries.GetUser(r.Context(), userId)
+	if err != nil {
+		slog.Error("Failed to fetch user for profile page", "error", err)
+		http.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
+		return
+	}
+
+	if err := pages.ProfilePage(&user).Render(r.Context(), w); err != nil {
+		slog.Error("Failed to render profile page", "error", err)
+		http.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
+		return
+	}
 }

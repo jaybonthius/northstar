@@ -18,6 +18,7 @@ const (
 	PageMonitor
 	PageReverse
 	PageSortable
+	PageProfile
 )
 
 func AuthenticatedNavigation(page page) templ.Component {
@@ -151,7 +152,7 @@ func AuthenticatedNavigation(page page) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 11, "\">Sortable</a></li><li><details class=\"dropdown\"><summary>Account</summary><ul dir=\"rtl\"><li><a href=\"#\">Profile</a></li><li><button data-on-click=\"@post('/logout')\" class=\"logout-nav-item\">Logout</button></li></ul></details></li></ul></nav>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 11, "\">Sortable</a></li><li><details class=\"dropdown\"><summary>Account</summary><ul dir=\"rtl\"><li><a href=\"/profile\">Profile</a></li><li><button data-on-click=\"@post('/logout')\" class=\"logout-nav-item\">Logout</button></li></ul></details></li></ul></nav>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

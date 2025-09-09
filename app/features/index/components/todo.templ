@@ -49,7 +49,6 @@ templ TodosMVCView(mvc *TodoMVC) {
 			data-signals={ fmt.Sprintf("{input:'%s'}", input) }
 		>
 			<section>
-				<header>
 					<div class="alert">
 						@common.Icon("material-symbols:info")
 						<div class="alert-content">
@@ -57,7 +56,6 @@ templ TodosMVCView(mvc *TodoMVC) {
 							<span><small>As you interact with the UI, the backend state is updated and new partial HTML fragments are sent down to the client via Server-Sent Events. You can make simple apps or full blown SPA replacements with this pattern. Open your dev tools and watch the network tab to see the magic happen (you will want to look for the "/todos" Network/EventStream tab).</small></span>
 						</div>
 					</div>
-					<h1>TODO</h1>
 					<p>
 						The input is bound to a local store, but this is not a single page application.  
 						It is like having <a href="https://htmx.org" target="_blank">HTMX</a> + 
@@ -82,7 +80,6 @@ templ TodosMVCView(mvc *TodoMVC) {
 						}
 						@common.SseIndicator("toggleAllFetching")
 					</div>
-				</header>
 				if hasTodos {
 					<section>
 						<ul>

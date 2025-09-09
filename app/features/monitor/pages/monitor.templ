@@ -20,6 +20,9 @@ templ MonitorPage() {
 		<main class="container">
 			@components.Navigation(components.PageMonitor)
 			<article>
+				<header>
+					<h1>System Monitoring</h1>
+				</header>
 				<div
 					id="container"
 					data-on-load={ datastar.GetSSE("/monitor/events") }
@@ -27,13 +30,13 @@ templ MonitorPage() {
 				>
 					<div class="grid">
 						<div id="mem">
-							<h1>Memory</h1>
+							<h2>Memory</h2>
 							<p>Total: <span data-text="$memTotal"></span></p>
 							<p>Used: <span data-text="$memUsed"></span></p>
 							<p>Used (%): <span data-text="$memUsedPercent"></span></p>
 						</div>
 						<div id="cpu">
-							<h1>CPU</h1>
+							<h2>CPU</h2>
 							<p>User: <span data-text="$cpuUser"></span></p>
 							<p>System: <span data-text="$cpuSystem"></span></p>
 							<p>Idle: <span data-text="$cpuIdle"></span></p>

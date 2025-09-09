@@ -61,6 +61,10 @@
   --alert-border: var(--orange-11);
 }
 
+header h1 {
+  margin: 0;
+}
+
 .active-nav-item,
 .login-nav-item,
 .logout-nav-item {

@@ -12,6 +12,9 @@ templ IndexPage(title string) {
 		<main class="container">
 			@components.Navigation(components.PageIndex)
 			<article>
+				<header>
+					<h1>TODO</h1>
+				</header>
 				<div id="todos-container" data-on-load={ datastar.GetSSE("/api/todos") }></div>
 			</article>
 		</main>

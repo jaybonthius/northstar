@@ -35,5 +35,10 @@ func SetupRoutes(router chi.Router, db *sql.DB, store sessions.Store) error {
 		r.Post("/", authHandlers.handleLogout)
 	})
 
+	router.Route("/profile", func(r chi.Router) {
+		r.Use(middleware.RequireAuth(store, db))
+		r.Get("/", authHandlers.handleProfilePage)
+	})
+
 	return nil
 }

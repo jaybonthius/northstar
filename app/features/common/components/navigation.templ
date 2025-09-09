@@ -10,6 +10,7 @@ const (
 	PageMonitor
 	PageReverse
 	PageSortable
+	PageProfile
 )
 
 templ AuthenticatedNavigation(page page) {
@@ -29,7 +30,7 @@ templ AuthenticatedNavigation(page page) {
 						Account
 					</summary>
 					<ul dir="rtl">
-						<li><a href="#">Profile</a></li>
+						<li><a href="/profile">Profile</a></li>
 						<li><button data-on-click="@post('/logout')" class="logout-nav-item">Logout</button></li>
 					</ul>
 				</details>

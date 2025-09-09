@@ -55,14 +55,14 @@ func ReversePage() templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "<article><div><div><label><span>Reverse</span> <input type=\"text\" data-bind-_name=\"\"></label><p class=\"reverse-result\" data-signals-_reversed=\"\" data-text=\"$_reversed\"></p><reverse-component data-on-reverse=\"$_reversed = evt.detail.value\" data-attr-name=\"$_name\"></reverse-component></div></div></article></main><script type=\"module\" src=\"")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "<article><header><h1>Reverse Web Component</h1></header><div><div><label><span>Reverse</span> <input type=\"text\" data-bind-_name=\"\"></label><p class=\"reverse-result\" data-signals-_reversed=\"\" data-text=\"$_reversed\"></p><reverse-component data-on-reverse=\"$_reversed = evt.detail.value\" data-attr-name=\"$_name\"></reverse-component></div></div></article></main><script type=\"module\" src=\"")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
 			var templ_7745c5c3_Var3 string
 			templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(static.StaticPath("reverse", "web-components/reverse-component.js"))
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `app/features/reverse/pages/reverse.templ`, Line: 26, Col: 97}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `app/features/reverse/pages/reverse.templ`, Line: 29, Col: 97}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
 			if templ_7745c5c3_Err != nil {
