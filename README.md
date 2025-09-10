@@ -34,7 +34,7 @@ Use the [live task](./Taskfile.yml#L83) from the [Taskfile](https://taskfile.dev
 go tool task live
 ```
 
-Navigate to [`http://localhost:7331`](http://localhost:7331) in your favorite web browser to begin
+Navigate to [`http://localhost:8080`](http://localhost:8080) in your favorite web browser to begin
 
 ## Debugging
 
